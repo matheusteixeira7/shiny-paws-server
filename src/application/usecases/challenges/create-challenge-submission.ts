@@ -1,6 +1,6 @@
-import { Submission } from '../../domain/entities/submission'
-import { ChallengesRepository } from '../repositories/ChallengesRepositoy'
-import { StudentsRepository } from '../repositories/StudentsRepository'
+import { Submission } from '../../../domain/entities/submission'
+import { ChallengesRepository } from '../../repositories/ChallengesRepositoy'
+import { StudentsRepository } from '../../repositories/StudentsRepository'
 
 type CreateChallengeSubmissionRequest = {
   studentId: string;
