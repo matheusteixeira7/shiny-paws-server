@@ -1,4 +1,4 @@
-import { UsersRepository } from '@application/repositories/UserRepository'
+import { UsersRepository } from '@application/repositories/UsersRepository'
 import { User } from '@domain/entities/user'
 
 type UserProps = {

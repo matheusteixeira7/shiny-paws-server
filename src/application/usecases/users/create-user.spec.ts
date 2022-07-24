@@ -1,5 +1,5 @@
 import { User } from '@domain/entities/user'
-import { InMemoryUsersRepository } from '@tests/repositories/in-memory-user-repository'
+import { InMemoryUsersRepository } from '@tests/repositories/in-memory-users-repository'
 import { CreateUser } from './create-user'
 
 describe('Create user use case', () => {
