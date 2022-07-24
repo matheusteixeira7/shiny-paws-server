@@ -1,30 +1,30 @@
 export default {
   clearMocks: true,
 
-  coverageProvider: "v8",
+  coverageProvider: 'v8',
 
   transform: {
-    "^.+\\.(t|j)sx?$": [
-      "@swc/jest",
+    '^.+\\.(t|j)sx?$': [
+      '@swc/jest',
       {
         jsc: {
           parser: {
-            syntax: "typescript",
+            syntax: 'typescript',
             tsx: false,
-            decorators: true,
+            decorators: true
           },
-          target: "es2017",
+          target: 'es2017',
           keepClassNames: true,
           transform: {
             legacyDecorator: true,
-            decoratorMetadata: true,
-          },
+            decoratorMetadata: true
+          }
         },
         module: {
-          type: "es6",
-          noInterop: false,
-        },
-      },
-    ],
-  },
-};
+          type: 'es6',
+          noInterop: false
+        }
+      }
+    ]
+  }
+}
