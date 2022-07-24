@@ -14,7 +14,7 @@ describe('Create customer use case', () => {
       address: '123 Main St'
     })
 
-    customersRepository.items.push(customer)
+    customersRepository.save(customer)
 
     await expect(sut.execute({
       name: 'Diego',
