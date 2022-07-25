@@ -9,7 +9,7 @@
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "clear && jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test-verbose": "clear && jest --passWithNoTests --runInBand",
-    "test-unit": "clear && npm test -- --watch -c",
+    "test-unit": "clear && yarn test -- --watch -c jest-unit-config.js",
     "test-integration": "clear && npm test -- --watch -c jest-integration-config.js",
     "test-staged": "clear && npm test -- --findRelatedTests",
     "test-ci": "clear && npm test -- --coverage"
