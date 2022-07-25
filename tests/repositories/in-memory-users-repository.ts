@@ -39,4 +39,8 @@ export class InMemoryUsersRepository implements UsersRepository {
 
     this.items.splice(index, 1)
   }
+
+  async list (): Promise<User[]> {
+    return this.items
+  }
 }
