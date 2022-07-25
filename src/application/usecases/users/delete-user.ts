@@ -10,6 +10,12 @@ export class DeleteUser {
   ) {}
 
   async execute ({ id }: UserProps) {
+    const user = await this.usersRepository.findById(id)
+
+    if (!user) {
+      throw new Error('User not found.')
+    }
+
     this.usersRepository.delete(id)
   }
 }
