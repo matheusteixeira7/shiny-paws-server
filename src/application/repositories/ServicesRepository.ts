@@ -5,4 +5,5 @@ export interface ServicesRepository {
   findByName(name: string): Promise<Service | null>
   save (customer: Service): Promise<Service>
   list (): Promise<Service[]>
+  delete (id: string): Promise<void>
 }

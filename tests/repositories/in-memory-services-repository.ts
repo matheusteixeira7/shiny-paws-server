@@ -33,4 +33,14 @@ export class InMemoryServicesRepository implements ServicesRepository {
   async list (): Promise<Service[]> {
     return this.items
   }
+
+  async delete (id: string): Promise<void> {
+    const index = this.items.findIndex(service => service.id === id)
+
+    if (index === -1) {
+      throw new Error('Service not found.')
+    }
+
+    this.items.splice(index, 1)
+  }
 }
