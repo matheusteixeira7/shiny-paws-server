@@ -49,6 +49,8 @@ describe('Update pet use case', () => {
       owner: customer
     })
 
+    await petsRepository.save(pet)
+
     const updatedPet = Object.assign({}, pet, {
       props: {
         ...pet.props,
@@ -58,8 +60,6 @@ describe('Update pet use case', () => {
         owner: customer2
       }
     })
-
-    await petsRepository.save(pet)
 
     const result = await sut.execute({
       id: pet.id,
@@ -97,6 +97,8 @@ describe('Update pet use case', () => {
       owner: customer
     })
 
+    await petsRepository.save(pet)
+
     const updatedPet = Object.assign({}, pet, {
       props: {
         ...pet.props,
@@ -107,8 +109,6 @@ describe('Update pet use case', () => {
       }
     })
 
-    await petsRepository.save(pet)
-
     const result = await sut.execute({
       id: pet.id,
       name: 'Brownie',
@@ -118,5 +118,101 @@ describe('Update pet use case', () => {
     })
 
     expect(result.props.specie).toEqual(updatedPet.props.specie)
+  })
+
+  it('should be able to update pets breed', async () => {
+    const petsRepository = new InMemoryPetsRepository()
+    const sut = new UpdatePet(petsRepository)
+
+    const customer = Customer.create({
+      name: 'John Doe',
+      email: 'doe@example.com',
+      phone: '123456',
+      address: '123 Main St'
+    })
+
+    const customer2 = Customer.create({
+      name: 'Matheus Teixeira',
+      email: 'teixeira@example.com',
+      phone: '123456',
+      address: '123 Main St'
+    })
+
+    const pet = Pet.create({
+      name: 'Apollo',
+      breed: 'Labrador',
+      specie: 'dog',
+      owner: customer
+    })
+
+    await petsRepository.save(pet)
+
+    const updatedPet = Object.assign({}, pet, {
+      props: {
+        ...pet.props,
+        name: 'Brownie',
+        specie: 'dog' as const,
+        breed: 'Pitbull',
+        owner: customer2
+      }
+    })
+
+    const result = await sut.execute({
+      id: pet.id,
+      name: 'Brownie',
+      specie: 'dog' as const,
+      breed: 'Pitbull',
+      owner: customer2
+    })
+
+    expect(result.props.breed).toEqual(updatedPet.props.breed)
+  })
+
+  it('should be able to update pets owner', async () => {
+    const petsRepository = new InMemoryPetsRepository()
+    const sut = new UpdatePet(petsRepository)
+
+    const customer = Customer.create({
+      name: 'John Doe',
+      email: 'doe@example.com',
+      phone: '123456',
+      address: '123 Main St'
+    })
+
+    const customer2 = Customer.create({
+      name: 'Matheus Teixeira',
+      email: 'teixeira@example.com',
+      phone: '123456',
+      address: '123 Main St'
+    })
+
+    const pet = Pet.create({
+      name: 'Apollo',
+      breed: 'Labrador',
+      specie: 'dog',
+      owner: customer
+    })
+
+    await petsRepository.save(pet)
+
+    const updatedPet = Object.assign({}, pet, {
+      props: {
+        ...pet.props,
+        name: 'Brownie',
+        specie: 'dog' as const,
+        breed: 'Pitbull',
+        owner: customer2
+      }
+    })
+
+    const result = await sut.execute({
+      id: pet.id,
+      name: 'Brownie',
+      specie: 'dog' as const,
+      breed: 'Pitbull',
+      owner: customer2
+    })
+
+    expect(result.props.owner).toEqual(updatedPet.props.owner)
   })
 })
