@@ -6,4 +6,5 @@ export interface PetsRepository {
   findOwnerById(ownerId: string): Promise<Pet[]>
   save (pet: Pet): Promise<Pet>
   delete (id: string): Promise<void>
+  list (): Promise<Pet[]>
 }

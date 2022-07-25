@@ -43,4 +43,8 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     this.items.splice(index, 1)
   }
+
+  async list (): Promise<Pet[]> {
+    return this.items
+  }
 }
