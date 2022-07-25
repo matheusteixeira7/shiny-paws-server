@@ -18,13 +18,13 @@ export class CreateService {
       throw new Error('Service already exists.')
     }
 
-    const newservice = Service.create({
+    const newService = Service.create({
       name,
       price
     })
 
-    this.servicesRepository.save(newservice)
+    this.servicesRepository.save(newService)
 
-    return newservice
+    return newService
   }
 }
