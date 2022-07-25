@@ -2,7 +2,7 @@ import { Entity } from '../../core/domain/Entity'
 
 type ServiceProps = {
   name: string
-  price: string
+  price: number
   createdAt?: Date
   updatedAt?: Date
 }
