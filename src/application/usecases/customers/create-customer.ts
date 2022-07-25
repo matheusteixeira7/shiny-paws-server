@@ -29,8 +29,6 @@ export class CreateCustomer {
       address
     })
 
-    console.log(newCustomer)
-
     this.customersRepository.save(newCustomer)
 
     return newCustomer
