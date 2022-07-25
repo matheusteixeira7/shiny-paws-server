@@ -4,7 +4,7 @@ import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-custo
 import { InMemoryPetsRepository } from '@tests/repositories/in-memory-pets-repository'
 import { CreatePet } from './create-pet'
 
-describe('Create user use case', () => {
+describe('Create pet use case', () => {
   it('should throw an error if customer does not exist', async () => {
     const customersRepository = new InMemoryCustomersRepository()
     const petsRepository = new InMemoryPetsRepository()
