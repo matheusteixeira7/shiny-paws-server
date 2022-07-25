@@ -33,4 +33,14 @@ export class InMemoryPetsRepository implements PetsRepository {
 
     return pet
   }
+
+  async delete (id: string): Promise<void> {
+    const index = this.items.findIndex(pet => pet.id === id)
+
+    if (index === -1) {
+      throw new Error('Service not found.')
+    }
+
+    this.items.splice(index, 1)
+  }
 }
