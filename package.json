@@ -7,12 +7,12 @@
     "lint": "eslint . --ext .ts,.tsx --fix",
     "dev": "clear && ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/main/server.ts",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
-    "test-verbose": "jest --passWithNoTests --runInBand",
-    "test-unit": "npm test -- --watch -c jest-unit-config.js",
-    "test-integration": "npm test -- --watch -c jest-integration-config.js",
-    "test-staged": "npm test -- --findRelatedTests",
-    "test-ci": "npm test -- --coverage"
+    "test": "clear && jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test-verbose": "clear && jest --passWithNoTests --runInBand",
+    "test-unit": "clear && npm test -- --watch -c jest-unit-config.js",
+    "test-integration": "clear && npm test -- --watch -c jest-integration-config.js",
+    "test-staged": "clear && npm test -- --findRelatedTests",
+    "test-ci": "clear && npm test -- --coverage"
   },
   "keywords": [],
   "author": "",
