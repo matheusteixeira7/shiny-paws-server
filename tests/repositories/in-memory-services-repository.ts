@@ -29,4 +29,8 @@ export class InMemoryServicesRepository implements ServicesRepository {
 
     return service
   }
+
+  async list (): Promise<Service[]> {
+    return this.items
+  }
 }
