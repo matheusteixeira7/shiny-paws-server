@@ -1,11 +1,13 @@
 import { CustomersRepository } from '@application/repositories/CustomersRepository'
 import { Customer } from '@domain/entities/customer'
+import { Pet } from '@domain/entities/pet'
 
 type CustomerProps = {
   name: string
   email: string
   phone: string
   address: string
+  pets?: Pet[]
 }
 
 export class CreateCustomer {
@@ -26,6 +28,8 @@ export class CreateCustomer {
       phone,
       address
     })
+
+    console.log(newCustomer)
 
     this.customersRepository.save(newCustomer)
 

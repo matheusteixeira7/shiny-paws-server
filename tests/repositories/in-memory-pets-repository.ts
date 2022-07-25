@@ -14,6 +14,20 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
+  async findOwnerById (ownerId: string): Promise<Pet[]> {
+    return this.items.filter(pet => pet.props.owner.id === ownerId)
+  }
+
+  async findByName (name: string): Promise<Pet | null> {
+    const pet = this.items.find(pet => pet.props.name === name)
+
+    if (!pet) {
+      return null
+    }
+
+    return pet
+  }
+
   async save (pet: Pet): Promise<Pet> {
     this.items.push(pet)
 
