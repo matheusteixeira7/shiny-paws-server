@@ -2,6 +2,7 @@ import { Customer } from '@domain/entities/customer'
 import { Entity } from '../../core/domain/Entity'
 
 type PetProps = {
+  id?: string
   name: string
   specie: 'dog' | 'cat'
   breed: string
@@ -19,7 +20,7 @@ export class Pet extends Entity<PetProps> {
     const pet = new Pet({
       ...props,
       createdAt: props.createdAt ?? new Date(),
-      updatedAt: new Date()
+      updatedAt: props.updatedAt ?? new Date()
     }, id)
 
     return pet
