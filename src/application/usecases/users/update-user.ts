@@ -20,9 +20,13 @@ export class UpdateUser {
     }
 
     Object.assign(user, {
-      name,
-      email,
-      password
+      props: {
+        ...user.props,
+        name,
+        email,
+        password,
+        updatedAt: new Date()
+      }
     })
 
     this.usersRepository.save(user)
