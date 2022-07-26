@@ -27,8 +27,6 @@ export class CreateUser {
       password: hashedPassword
     })
 
-    console.log(JSON.stringify(newUser, null, 2))
-
     this.usersRepository.save(newUser)
 
     return newUser
