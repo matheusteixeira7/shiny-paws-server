@@ -29,4 +29,18 @@ export class InMemoryCustomersRepository implements CustomersRepository {
 
     return customer
   }
+
+  async delete (id: string): Promise<void> {
+    const index = this.items.findIndex(customer => customer.id === id)
+
+    if (index === -1) {
+      throw new Error('Customer not found.')
+    }
+
+    this.items.splice(index, 1)
+  }
+
+  async list (): Promise<Customer[]> {
+    return this.items
+  }
 }
