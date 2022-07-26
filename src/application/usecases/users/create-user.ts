@@ -19,11 +19,15 @@ export class CreateUser {
       throw new Error('User already exists.')
     }
 
+    const hashedPassword = await this.usersRepository.hashPassword(password)
+
     const newUser = User.create({
       name,
       email,
-      password
+      password: hashedPassword
     })
+
+    console.log(JSON.stringify(newUser, null, 2))
 
     this.usersRepository.save(newUser)
 

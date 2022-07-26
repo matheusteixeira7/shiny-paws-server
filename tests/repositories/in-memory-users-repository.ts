@@ -1,5 +1,6 @@
 import { UsersRepository } from '@application/repositories/UsersRepository'
 import { User } from '@domain/entities/user'
+import { hash } from 'bcryptjs'
 
 export class InMemoryUsersRepository implements UsersRepository {
   public items: User[] = []
@@ -42,5 +43,9 @@ export class InMemoryUsersRepository implements UsersRepository {
 
   async list (): Promise<User[]> {
     return this.items
+  }
+
+  async hashPassword (password: string): Promise<string> {
+    return await hash(password, 8)
   }
 }
