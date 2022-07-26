@@ -32,8 +32,6 @@ export class UpdatePet {
       }
     })
 
-    console.log(JSON.stringify(updatedPet, null, 2))
-
     this.petsRepository.save(updatedPet)
 
     return updatedPet
