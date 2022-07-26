@@ -20,7 +20,7 @@ export class UpdateCustomer {
       throw new Error('Customer not found.')
     }
 
-    const updatedCustomer = Object.assign({}, customer, {
+    Object.assign(customer, {
       props: {
         ...customer.props,
         name,
@@ -31,8 +31,8 @@ export class UpdateCustomer {
       }
     })
 
-    this.customersRepository.save(updatedCustomer)
+    this.customersRepository.save(customer)
 
-    return updatedCustomer
+    return customer
   }
 }
