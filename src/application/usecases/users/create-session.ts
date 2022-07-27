@@ -1,7 +1,6 @@
-import authConfig from '@main/config/auth'
-import { sign } from 'jsonwebtoken'
 import { UsersRepository } from '@application/repositories/UsersRepository'
 import { User } from '@domain/entities/user'
+import { JwtTokenHandler } from '@infra/gateways/jwt-token-handler'
 
 interface IRequest {
   email: string
@@ -31,10 +30,7 @@ export class CreateSession {
       throw new Error('Incorrect password.')
     }
 
-    const token = sign({}, authConfig.jwt.secret, {
-      subject: user.id,
-      expiresIn: authConfig.jwt.expiresIn
-    })
+    const token = await new JwtTokenHandler().generate(user.id)
 
     return { user, token }
   }
