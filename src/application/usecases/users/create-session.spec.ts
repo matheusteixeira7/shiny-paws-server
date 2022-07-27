@@ -1,4 +1,5 @@
 import { User } from '@domain/entities/user'
+import { HashHandler } from '@infra/gateways/hash-handler'
 import { InMemoryUsersRepository } from '@tests/repositories/in-memory-users-repository'
 import { CreateSession } from './create-session'
 
@@ -22,7 +23,7 @@ describe('Create session use case', () => {
     const user = User.create({
       name: 'Diego',
       email: 'doe@email.com',
-      password: await usersRepository.hashPassword('123456')
+      password: await new HashHandler().generate('123456')
     })
 
     usersRepository.items.push(user)
@@ -37,7 +38,7 @@ describe('Create session use case', () => {
     const user = User.create({
       name: 'Diego',
       email: 'doe@email.com',
-      password: await usersRepository.hashPassword('123456')
+      password: await new HashHandler().generate('123456')
     })
 
     usersRepository.items.push(user)

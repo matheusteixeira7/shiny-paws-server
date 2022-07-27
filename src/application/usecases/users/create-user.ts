@@ -1,5 +1,6 @@
 import { UsersRepository } from '@application/repositories/UsersRepository'
 import { User } from '@domain/entities/user'
+import { HashHandler } from '@infra/gateways/hash-handler'
 
 type UserProps = {
   name: string
@@ -19,7 +20,7 @@ export class CreateUser {
       throw new Error('User already exists.')
     }
 
-    const hashedPassword = await this.usersRepository.hashPassword(password)
+    const hashedPassword = await new HashHandler().generate(password)
 
     const newUser = User.create({
       name,

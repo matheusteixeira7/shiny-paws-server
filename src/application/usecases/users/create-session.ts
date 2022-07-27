@@ -1,5 +1,6 @@
 import { UsersRepository } from '@application/repositories/UsersRepository'
 import { User } from '@domain/entities/user'
+import { HashHandler } from '@infra/gateways/hash-handler'
 import { JwtTokenHandler } from '@infra/gateways/jwt-token-handler'
 
 interface IRequest {
@@ -24,7 +25,7 @@ export class CreateSession {
       throw new Error('User not found.')
     }
 
-    const passwordConfirmed = await this.usersRepository.comparePassword(password, user.props.password)
+    const passwordConfirmed = await new HashHandler().compare(password, user.props.password)
 
     if (!passwordConfirmed) {
       throw new Error('Incorrect password.')

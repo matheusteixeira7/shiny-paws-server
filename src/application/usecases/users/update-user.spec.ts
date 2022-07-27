@@ -1,4 +1,5 @@
 import { User } from '@domain/entities/user'
+import { HashHandler } from '@infra/gateways/hash-handler'
 import { InMemoryUsersRepository } from '@tests/repositories/in-memory-users-repository'
 import { UpdateUser } from './update-user'
 
@@ -145,7 +146,7 @@ describe('Update user use case', () => {
         ...user.props,
         name: 'John Doe',
         email: 'doe@email.com',
-        password: await usersRepository.hashPassword('123456'),
+        password: await new HashHandler().generate('123456'),
         updatedAt: new Date()
       }
     })

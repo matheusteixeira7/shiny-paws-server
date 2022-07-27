@@ -1,4 +1,5 @@
 import { UsersRepository } from '@application/repositories/UsersRepository'
+import { HashHandler } from '@infra/gateways/hash-handler'
 
 type UserProps = {
   id: string
@@ -31,15 +32,13 @@ export class UpdateUser {
     }
 
     if (password && oldPassword) {
-      const checkOldPassword = await this.usersRepository.comparePassword(
-        oldPassword, user.props.password
-      )
+      const checkOldPassword = await new HashHandler().compare(oldPassword, user.props.password)
 
       if (!checkOldPassword) {
         throw new Error('Old password does not match')
       }
 
-      user.props.password = await this.usersRepository.hashPassword(password)
+      user.props.password = await new HashHandler().generate(password)
     }
 
     Object.assign(user, {
