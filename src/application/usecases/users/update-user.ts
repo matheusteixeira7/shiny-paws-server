@@ -4,7 +4,8 @@ type UserProps = {
   id: string
   name: string
   email: string
-  password: string
+  password?: string
+  oldPassword?: string
 }
 
 export class UpdateUser {
@@ -12,11 +13,33 @@ export class UpdateUser {
     private usersRepository: UsersRepository
   ) {}
 
-  async execute ({ name, id, email, password }: UserProps) {
+  async execute ({ id, name, email, password, oldPassword }: UserProps) {
     const user = await this.usersRepository.findById(id)
 
     if (!user) {
       throw new Error('User not found.')
+    }
+
+    const userUpdateEmail = await this.usersRepository.findByEmail(email)
+
+    if (userUpdateEmail && userUpdateEmail.id !== id) {
+      throw new Error('Email already in use')
+    }
+
+    if (password && !oldPassword) {
+      throw new Error('Old password is required')
+    }
+
+    if (password && oldPassword) {
+      const checkOldPassword = await this.usersRepository.comparePassword(
+        oldPassword, user.props.password
+      )
+
+      if (!checkOldPassword) {
+        throw new Error('Old password does not match')
+      }
+
+      user.props.password = await this.usersRepository.hashPassword(password)
     }
 
     Object.assign(user, {
