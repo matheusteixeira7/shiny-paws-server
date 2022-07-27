@@ -3,6 +3,6 @@ export interface TokenGenerator {
   generate: (input: string) => Promise<string>
 }
 
-// export interface TokenValidator {
-//   validate: (input: string) => Promise<boolean>
-// }
+export interface TokenValidator {
+  validate: (input: string) => Promise<any>
+}
