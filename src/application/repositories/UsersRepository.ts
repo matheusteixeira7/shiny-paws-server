@@ -7,4 +7,5 @@ export interface UsersRepository {
   delete (id: string): Promise<void>
   list (): Promise<User[]>
   hashPassword (password: string): Promise<string>
+  comparePassword (password: string, hash: string): Promise<boolean>
 }

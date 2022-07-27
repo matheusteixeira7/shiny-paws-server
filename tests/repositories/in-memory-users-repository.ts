@@ -1,6 +1,6 @@
 import { UsersRepository } from '@application/repositories/UsersRepository'
 import { User } from '@domain/entities/user'
-import { hash } from 'bcryptjs'
+import { hash, compare } from 'bcryptjs'
 
 export class InMemoryUsersRepository implements UsersRepository {
   public items: User[] = []
@@ -26,7 +26,15 @@ export class InMemoryUsersRepository implements UsersRepository {
   }
 
   async save (user: User): Promise<User> {
-    this.items.push(user)
+    const findIndex = this.items.findIndex(item => item.id === user.id)
+
+    if (findIndex === -1) {
+      this.items.push(user)
+    }
+
+    if (findIndex !== -1) {
+      this.items[findIndex] = user
+    }
 
     return user
   }
@@ -47,5 +55,9 @@ export class InMemoryUsersRepository implements UsersRepository {
 
   async hashPassword (password: string): Promise<string> {
     return await hash(password, 8)
+  }
+
+  async comparePassword (password: string, hash: string): Promise<boolean> {
+    return await compare(password, hash)
   }
 }
