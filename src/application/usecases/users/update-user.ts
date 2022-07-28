@@ -49,7 +49,6 @@ export class UpdateUser {
         ...user.props,
         name,
         email,
-        password,
         updatedAt: new Date()
       }
     })
