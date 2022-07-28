@@ -1,8 +1,8 @@
 import 'reflect-metadata'
+import 'express-async-errors'
 import 'module-alias/register'
 import 'dotenv/config'
 import '@infra/container'
-import 'express-async-errors'
 
 import cors from 'cors'
 import routes from './routes'
