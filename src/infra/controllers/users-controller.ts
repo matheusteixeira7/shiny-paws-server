@@ -24,9 +24,8 @@ export class UsersController {
 
   async update (req: Request, res: Response): Promise<Response> {
     const { id } = req.params
-    const { name, email } = req.body
     const updateUser = container.resolve(UpdateUser)
-    const user = await updateUser.execute({ id, name, email })
+    const user = await updateUser.execute({ id, ...req.body })
     return res.json(user)
   }
 
