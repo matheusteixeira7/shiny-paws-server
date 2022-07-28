@@ -1,4 +1,5 @@
 import { UsersRepository } from '@application/repositories/UsersRepository'
+import { inject, injectable } from 'tsyringe'
 import { HashHandler } from '@infra/gateways/hash-handler'
 
 type UserProps = {
@@ -9,8 +10,10 @@ type UserProps = {
   oldPassword?: string
 }
 
+@injectable()
 export class UpdateUser {
   constructor (
+    @inject('InMemoryUsersRepository')
     private usersRepository: UsersRepository
   ) {}
 

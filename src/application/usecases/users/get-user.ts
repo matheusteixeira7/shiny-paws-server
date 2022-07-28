@@ -1,11 +1,14 @@
+import { inject, injectable } from 'tsyringe'
 import { UsersRepository } from '@application/repositories/UsersRepository'
 
 type UserProps = {
   id: string
 }
 
+@injectable()
 export class GetUser {
   constructor (
+    @inject('InMemoryUsersRepository')
     private usersRepository: UsersRepository
   ) {}
 
