@@ -1,6 +1,7 @@
 import { UsersRepository } from '@application/repositories/UsersRepository'
 import { User } from '@domain/entities/user'
 import { HashHandler } from '@infra/gateways/hash-handler'
+import { inject, injectable } from 'tsyringe'
 import { JwtTokenHandler } from '@infra/gateways/jwt-token-handler'
 
 interface IRequest {
@@ -13,8 +14,10 @@ interface IResponse {
   token: string
 }
 
+@injectable()
 export class CreateSession {
   constructor (
+    @inject('InMemoryUsersRepository')
     private usersRepository: UsersRepository
   ) {}
 
