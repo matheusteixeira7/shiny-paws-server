@@ -19,7 +19,7 @@
       "@tests/*": ["./tests/*"]
 
     },
-    "typeRoots": ["@types", "./node_modules/@types"],
+    "typeRoots": ["./src/main/types", "./node_modules/@types"],
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
