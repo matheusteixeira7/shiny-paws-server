@@ -3,6 +3,7 @@ const pathsToModuleNameMapper = require('ts-jest/').pathsToModuleNameMapper
 const compilerOptions = require('./tsconfig.json').compilerOptions
 
 module.exports = {
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   clearMocks: true,
   collectCoverage: true,
   collectCoverageFrom: ['<rootDir>/src/application/usecases/**/*.ts'],

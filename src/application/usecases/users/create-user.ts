@@ -1,6 +1,8 @@
-import { UsersRepository } from '@application/repositories/UsersRepository'
 import { User } from '@domain/entities/user'
 import { HashHandler } from '@infra/gateways/hash-handler'
+import { inject, injectable } from 'tsyringe'
+import { UsersRepository } from '@application/repositories/UsersRepository'
+import { EmailInUseError } from '@application/errors/email-in-use-error'
 
 type UserProps = {
   name: string
@@ -8,8 +10,10 @@ type UserProps = {
   password: string
 }
 
+@injectable()
 export class CreateUser {
   constructor (
+    @inject('InMemoryUsersRepository')
     private usersRepository: UsersRepository
   ) {}
 
@@ -17,7 +21,7 @@ export class CreateUser {
     const user = await this.usersRepository.findByEmail(email)
 
     if (user) {
-      throw new Error('User already exists.')
+      throw new EmailInUseError()
     }
 
     const hashedPassword = await new HashHandler().generate(password)
