@@ -1,11 +1,49 @@
 import { UsersController } from '@infra/controllers/users-controller'
 import { Router } from 'express'
+import { celebrate, Joi, Segments } from 'celebrate'
 
 export const usersRouter = Router()
 const usersController = new UsersController()
 
 usersRouter.get('/', usersController.list)
-usersRouter.get('/:id', usersController.get)
-usersRouter.post('/', usersController.create)
-usersRouter.put('/:id', usersController.update)
-usersRouter.delete('/:id', usersController.delete)
+
+usersRouter.get('/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required()
+    }
+  }),
+  usersController.get
+)
+
+usersRouter.post('/',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required()
+    }
+  }),
+  usersController.create
+)
+
+usersRouter.put('/:id',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required()
+    },
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required()
+    }
+  }),
+  usersController.update
+)
+
+usersRouter.delete('/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required()
+    }
+  }),
+  usersController.delete
+)
