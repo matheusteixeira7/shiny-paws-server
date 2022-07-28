@@ -13,6 +13,11 @@ module.exports = {
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
     prefix: '<rootDir>/'
   }),
+  coveragePathIgnorePatterns: [
+    'index.js',
+    'index.jsx',
+    'index.ts'
+  ],
   preset: 'ts-jest',
   testEnvironment: 'node',
   testMatch: ['**/*.spec.ts']
