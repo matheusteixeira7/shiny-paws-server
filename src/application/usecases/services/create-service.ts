@@ -1,13 +1,15 @@
 import { ServicesRepository } from '@application/repositories/ServicesRepository'
 import { Service } from '@domain/entities/service'
+import { inject, injectable } from 'tsyringe'
 
 type ServiceProps = {
   name: string
   price: number
 }
-
+@injectable()
 export class CreateService {
   constructor (
+    @inject('InMemoryCustomersRepository')
     private servicesRepository: ServicesRepository
   ) {}
 

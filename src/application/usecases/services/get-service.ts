@@ -1,11 +1,14 @@
 import { ServicesRepository } from '@application/repositories/ServicesRepository'
+import { inject, injectable } from 'tsyringe'
 
 type UserProps = {
   id: string
 }
 
+@injectable()
 export class GetService {
   constructor (
+    @inject('InMemoryCustomersRepository')
     private servicesRepository: ServicesRepository
   ) {}
 
