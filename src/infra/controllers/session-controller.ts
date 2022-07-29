@@ -1,5 +1,5 @@
+import { CreateSession } from '@application/usecases/session/create-session'
 import { Request, Response } from 'express'
-import { CreateSession } from '@application/usecases/users'
 import { container } from 'tsyringe'
 
 export class SessionController {
