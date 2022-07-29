@@ -25,7 +25,15 @@ export class InMemoryServicesRepository implements ServicesRepository {
   }
 
   async save (service: Service): Promise<Service> {
-    this.items.push(service)
+    const findIndex = this.items.findIndex(item => item.id === service.id)
+
+    if (findIndex === -1) {
+      this.items.push(service)
+    }
+
+    if (findIndex !== -1) {
+      this.items[findIndex] = service
+    }
 
     return service
   }
