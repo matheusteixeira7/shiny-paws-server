@@ -8,7 +8,7 @@ type UserProps = {
 @injectable()
 export class GetService {
   constructor (
-    @inject('InMemoryCustomersRepository')
+    @inject('InMemoryServicesRepository')
     private servicesRepository: ServicesRepository
   ) {}
 

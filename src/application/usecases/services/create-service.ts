@@ -1,3 +1,4 @@
+import { ServerError } from '@application/errors'
 import { ServicesRepository } from '@application/repositories/ServicesRepository'
 import { Service } from '@domain/entities/service'
 import { inject, injectable } from 'tsyringe'
@@ -9,7 +10,7 @@ type ServiceProps = {
 @injectable()
 export class CreateService {
   constructor (
-    @inject('InMemoryCustomersRepository')
+    @inject('InMemoryServicesRepository')
     private servicesRepository: ServicesRepository
   ) {}
 
@@ -17,7 +18,7 @@ export class CreateService {
     const service = await this.servicesRepository.findByName(name)
 
     if (service) {
-      throw new Error('Service already exists.')
+      throw new ServerError('Service already exists.')
     }
 
     const newService = Service.create({

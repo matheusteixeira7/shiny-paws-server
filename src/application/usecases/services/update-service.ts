@@ -10,7 +10,7 @@ type ServiceProps = {
 @injectable()
 export class UpdateService {
   constructor (
-    @inject('InMemoryCustomersRepository')
+    @inject('InMemoryServicesRepository')
     private servicesRepository: ServicesRepository
   ) {}
 

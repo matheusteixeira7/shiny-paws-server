@@ -8,7 +8,7 @@ type ServiceProps = {
 @injectable()
 export class DeleteService {
   constructor (
-    @inject('InMemoryCustomersRepository')
+    @inject('InMemoryServicesRepository')
     private servicesRepository: ServicesRepository
   ) {}
 

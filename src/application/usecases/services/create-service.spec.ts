@@ -17,7 +17,7 @@ describe('Create service use case', () => {
     await expect(sut.execute({
       name: 'Banho e Tosa',
       price: 120
-    })).rejects.toThrowError('Service already exists.')
+    })).rejects.toThrow()
   })
 
   it('should be able to create a new service', async () => {
