@@ -1,11 +1,14 @@
 import { CustomersRepository } from '@application/repositories/CustomersRepository'
+import { inject, injectable } from 'tsyringe'
 
 type CustomerProps = {
   id: string
 }
 
+@injectable()
 export class GetCustomer {
   constructor (
+    @inject('InMemoryCustomersRepository')
     private customersRepository: CustomersRepository
   ) {}
 

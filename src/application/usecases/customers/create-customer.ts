@@ -1,6 +1,7 @@
 import { CustomersRepository } from '@application/repositories/CustomersRepository'
 import { Customer } from '@domain/entities/customer'
 import { Pet } from '@domain/entities/pet'
+import { inject, injectable } from 'tsyringe'
 
 type CustomerProps = {
   name: string
@@ -10,8 +11,10 @@ type CustomerProps = {
   pets?: Pet[]
 }
 
+@injectable()
 export class CreateCustomer {
   constructor (
+    @inject('InMemoryCustomersRepository')
     private customersRepository: CustomersRepository
   ) {}
 

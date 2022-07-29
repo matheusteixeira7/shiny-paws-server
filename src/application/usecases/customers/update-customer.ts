@@ -1,4 +1,5 @@
 import { CustomersRepository } from '@application/repositories/CustomersRepository'
+import { inject, injectable } from 'tsyringe'
 
 type CustomerProps = {
   id: string
@@ -8,8 +9,10 @@ type CustomerProps = {
   address: string
 }
 
+@injectable()
 export class UpdateCustomer {
   constructor (
+    @inject('InMemoryCustomersRepository')
     private customersRepository: CustomersRepository
   ) {}
 
