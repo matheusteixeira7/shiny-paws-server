@@ -1,11 +1,14 @@
 import { PetsRepository } from '@application/repositories/PetsRepository'
+import { inject, injectable } from 'tsyringe'
 
 type PetProps = {
   id: string
 }
 
+@injectable()
 export class DeletePet {
   constructor (
+    @inject('InMemoryPetsRepository')
     private petsRepository: PetsRepository
   ) {}
 

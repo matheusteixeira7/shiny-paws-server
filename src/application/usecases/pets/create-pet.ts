@@ -2,6 +2,7 @@ import { CustomersRepository } from '@application/repositories/CustomersReposito
 import { PetsRepository } from '@application/repositories/PetsRepository'
 import { Customer } from '@domain/entities/customer'
 import { Pet } from '@domain/entities/pet'
+import { inject, injectable } from 'tsyringe'
 
 type PetProps = {
   name: string
@@ -10,9 +11,12 @@ type PetProps = {
   owner: Customer
 }
 
+@injectable()
 export class CreatePet {
   constructor (
+    @inject('InMemoryPetsRepository')
     private petsRepository: PetsRepository,
+    @inject('InMemoryCustomersRepository')
     private customersRepository: CustomersRepository
 
   ) {}

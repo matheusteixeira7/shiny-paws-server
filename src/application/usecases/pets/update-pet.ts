@@ -1,5 +1,6 @@
 import { Customer } from '@domain/entities/customer'
 import { PetsRepository } from '@application/repositories/PetsRepository'
+import { inject, injectable } from 'tsyringe'
 
 type PetProps = {
   id: string
@@ -9,8 +10,10 @@ type PetProps = {
   owner: Customer
 }
 
+@injectable()
 export class UpdatePet {
   constructor (
+    @inject('InMemoryPetsRepository')
     private petsRepository: PetsRepository
   ) {}
 
