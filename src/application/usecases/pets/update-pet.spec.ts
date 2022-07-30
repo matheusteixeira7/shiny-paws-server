@@ -6,15 +6,15 @@ import { UpdatePet } from './update-pet'
 
 let petsRepository: InMemoryPetsRepository
 let customersRepository: InMemoryCustomersRepository
+let sut: UpdatePet
 
 describe('Update pet use case', () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository()
     customersRepository = new InMemoryCustomersRepository()
+    sut = new UpdatePet(petsRepository, customersRepository)
   })
   it('should throw error if pet not found', async () => {
-    const sut = new UpdatePet(petsRepository, customersRepository)
-
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',
@@ -32,8 +32,6 @@ describe('Update pet use case', () => {
   })
 
   it('should be able to update pets name', async () => {
-    const sut = new UpdatePet(petsRepository, customersRepository)
-
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',
@@ -79,8 +77,6 @@ describe('Update pet use case', () => {
   })
 
   it('should be able to update pets specie', async () => {
-    const sut = new UpdatePet(petsRepository, customersRepository)
-
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',
@@ -126,8 +122,6 @@ describe('Update pet use case', () => {
   })
 
   it('should be able to update pets breed', async () => {
-    const sut = new UpdatePet(petsRepository, customersRepository)
-
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',
@@ -173,8 +167,6 @@ describe('Update pet use case', () => {
   })
 
   it('should be able to update pets owner', async () => {
-    const sut = new UpdatePet(petsRepository, customersRepository)
-
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',

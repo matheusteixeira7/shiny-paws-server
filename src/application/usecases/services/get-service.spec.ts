@@ -1,21 +1,22 @@
-import { Service } from '@domain/entities/service'
-import { InMemoryServicesRepository } from '@tests/repositories/in-memory-services-repository'
+import { Service } from '@domain/entities'
+import { InMemoryServicesRepository } from '@tests/repositories'
 import { GetService } from './get-service'
 
-describe('Get service use case', () => {
-  it('should throw error if service do not exists', async () => {
-    const servicesRepository = new InMemoryServicesRepository()
-    const sut = new GetService(servicesRepository)
+let servicesRepository: InMemoryServicesRepository
+let sut: GetService
 
+describe('Get service use case', () => {
+  beforeEach(() => {
+    servicesRepository = new InMemoryServicesRepository()
+    sut = new GetService(servicesRepository)
+  })
+  it('should throw error if service do not exists', async () => {
     await expect(sut.execute({
       id: '1'
     })).rejects.toThrowError('Service not found.')
   })
 
   it('should be able to get a service', async () => {
-    const servicesRepository = new InMemoryServicesRepository()
-    const sut = new GetService(servicesRepository)
-
     const service = Service.create({
       name: 'Banho e tosa',
       price: 120

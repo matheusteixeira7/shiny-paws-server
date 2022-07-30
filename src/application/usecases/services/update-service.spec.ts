@@ -1,12 +1,16 @@
-import { Service } from '@domain/entities/service'
-import { InMemoryServicesRepository } from '@tests/repositories/in-memory-services-repository'
+import { Service } from '@domain/entities'
+import { InMemoryServicesRepository } from '@tests/repositories'
 import { UpdateService } from './update-service'
 
-describe('Update service use case', () => {
-  it('should throw error if service not found exists', async () => {
-    const servicesRepository = new InMemoryServicesRepository()
-    const sut = new UpdateService(servicesRepository)
+let servicesRepository: InMemoryServicesRepository
+let sut: UpdateService
 
+describe('Update service use case', () => {
+  beforeEach(() => {
+    servicesRepository = new InMemoryServicesRepository()
+    sut = new UpdateService(servicesRepository)
+  })
+  it('should throw error if service not found exists', async () => {
     await expect(sut.execute({
       id: '1',
       name: 'Banho e tosa',
@@ -15,9 +19,6 @@ describe('Update service use case', () => {
   })
 
   it('should be able to update services name', async () => {
-    const servicesRepository = new InMemoryServicesRepository()
-    const sut = new UpdateService(servicesRepository)
-
     const service = Service.create({
       name: 'Banho e tosa',
       price: 120
@@ -43,9 +44,6 @@ describe('Update service use case', () => {
   })
 
   it('should be able to update services price', async () => {
-    const servicesRepository = new InMemoryServicesRepository()
-    const sut = new UpdateService(servicesRepository)
-
     const service = Service.create({
       name: 'Banho e tosa',
       price: 120

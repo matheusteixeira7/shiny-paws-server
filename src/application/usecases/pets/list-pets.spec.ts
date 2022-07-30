@@ -3,11 +3,15 @@ import { Pet } from '@domain/entities/pet'
 import { InMemoryPetsRepository } from '@tests/repositories/in-memory-pets-repository'
 import { ListPets } from './list-pets'
 
-describe('List pets use case', () => {
-  it('should be able to list pets', async () => {
-    const petsRepository = new InMemoryPetsRepository()
-    const sut = new ListPets(petsRepository)
+let petsRepository: InMemoryPetsRepository
+let sut: ListPets
 
+describe('List pets use case', () => {
+  beforeEach(() => {
+    petsRepository = new InMemoryPetsRepository()
+    sut = new ListPets(petsRepository)
+  })
+  it('should be able to list pets', async () => {
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',

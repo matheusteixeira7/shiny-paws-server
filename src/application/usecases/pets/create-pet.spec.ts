@@ -4,12 +4,17 @@ import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-custo
 import { InMemoryPetsRepository } from '@tests/repositories/in-memory-pets-repository'
 import { CreatePet } from './create-pet'
 
-describe('Create pet use case', () => {
-  it('should throw an error if customer does not exist', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const petsRepository = new InMemoryPetsRepository()
-    const sut = new CreatePet(petsRepository, customersRepository)
+let petsRepository: InMemoryPetsRepository
+let customersRepository: InMemoryCustomersRepository
+let sut: CreatePet
 
+describe('Create pet use case', () => {
+  beforeEach(() => {
+    petsRepository = new InMemoryPetsRepository()
+    customersRepository = new InMemoryCustomersRepository()
+    sut = new CreatePet(petsRepository, customersRepository)
+  })
+  it('should throw an error if customer does not exist', async () => {
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',
@@ -26,10 +31,6 @@ describe('Create pet use case', () => {
   })
 
   it('should be able to create a new pet', async () => {
-    const petsRepository = new InMemoryPetsRepository()
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new CreatePet(petsRepository, customersRepository)
-
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',

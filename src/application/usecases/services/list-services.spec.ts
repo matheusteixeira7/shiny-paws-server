@@ -1,12 +1,16 @@
-import { Service } from '@domain/entities/service'
-import { InMemoryServicesRepository } from '@tests/repositories/in-memory-services-repository'
+import { Service } from '@domain/entities'
+import { InMemoryServicesRepository } from '@tests/repositories'
 import { ListServices } from './list-services'
 
-describe('List user use case', () => {
-  it('should be able to list users', async () => {
-    const servicesRepository = new InMemoryServicesRepository()
-    const sut = new ListServices(servicesRepository)
+let servicesRepository: InMemoryServicesRepository
+let sut: ListServices
 
+describe('List user use case', () => {
+  beforeEach(() => {
+    servicesRepository = new InMemoryServicesRepository()
+    sut = new ListServices(servicesRepository)
+  })
+  it('should be able to list users', async () => {
     const service1 = Service.create({
       name: 'Banho e tosa',
       price: 120

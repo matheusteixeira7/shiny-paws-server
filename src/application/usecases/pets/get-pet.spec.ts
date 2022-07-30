@@ -4,21 +4,23 @@ import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-custo
 import { InMemoryPetsRepository } from '@tests/repositories/in-memory-pets-repository'
 import { GetPet } from './get-pet'
 
-describe('Get pet use case', () => {
-  it('should throw error if pet do not exists', async () => {
-    const petsRepository = new InMemoryPetsRepository()
-    const sut = new GetPet(petsRepository)
+let petsRepository: InMemoryPetsRepository
+let customersRepository: InMemoryCustomersRepository
+let sut: GetPet
 
+describe('Get pet use case', () => {
+  beforeEach(() => {
+    petsRepository = new InMemoryPetsRepository()
+    customersRepository = new InMemoryCustomersRepository()
+    sut = new GetPet(petsRepository)
+  })
+  it('should throw error if pet do not exists', async () => {
     await expect(sut.execute({
       id: '1'
     })).rejects.toThrowError('Pet not found.')
   })
 
   it('should be able to get a pet', async () => {
-    const petsRepository = new InMemoryPetsRepository()
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new GetPet(petsRepository)
-
     const customer = Customer.create({
       name: 'Diego',
       email: 'doe@example.com',

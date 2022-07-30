@@ -1,12 +1,16 @@
-import { Service } from '@domain/entities/service'
-import { InMemoryServicesRepository } from '@tests/repositories/in-memory-services-repository'
+import { Service } from '@domain/entities'
+import { InMemoryServicesRepository } from '@tests/repositories'
 import { CreateService } from './create-service'
 
-describe('Create service use case', () => {
-  it('should throw error if service already exists', async () => {
-    const servicesRepository = new InMemoryServicesRepository()
-    const sut = new CreateService(servicesRepository)
+let servicesRepository: InMemoryServicesRepository
+let sut: CreateService
 
+describe('Create service use case', () => {
+  beforeEach(() => {
+    servicesRepository = new InMemoryServicesRepository()
+    sut = new CreateService(servicesRepository)
+  })
+  it('should throw error if service already exists', async () => {
     const service = Service.create({
       name: 'Banho e Tosa',
       price: 120
@@ -21,9 +25,6 @@ describe('Create service use case', () => {
   })
 
   it('should be able to create a new service', async () => {
-    const servicesRepository = new InMemoryServicesRepository()
-    const sut = new CreateService(servicesRepository)
-
     const service = await sut.execute({
       name: 'Banho e Tosa',
       price: 120
