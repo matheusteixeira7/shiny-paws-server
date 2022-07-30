@@ -38,7 +38,7 @@ export class UpdatePet {
         name,
         specie,
         breed,
-        owner: petOwner,
+        ownerId: petOwner.id,
         updatedAt: new Date()
       }
     })

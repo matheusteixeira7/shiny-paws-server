@@ -32,7 +32,7 @@ describe('Get pet use case', () => {
       name: 'Banho e tosa',
       specie: 'dog',
       breed: 'labrador',
-      owner: customer
+      ownerId: customer.id
 
     })
 

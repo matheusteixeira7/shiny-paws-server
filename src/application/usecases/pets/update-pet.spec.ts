@@ -51,7 +51,7 @@ describe('Update pet use case', () => {
       name: 'Apollo',
       breed: 'Labrador',
       specie: 'dog',
-      owner: customer
+      ownerId: customer.id
     })
 
     await petsRepository.save(pet)
@@ -99,7 +99,7 @@ describe('Update pet use case', () => {
       name: 'Apollo',
       breed: 'Labrador',
       specie: 'dog',
-      owner: customer
+      ownerId: customer.id
     })
 
     await petsRepository.save(pet)
@@ -147,7 +147,7 @@ describe('Update pet use case', () => {
       name: 'Apollo',
       breed: 'Labrador',
       specie: 'dog',
-      owner: customer
+      ownerId: customer.id
     })
 
     await petsRepository.save(pet)
@@ -195,7 +195,7 @@ describe('Update pet use case', () => {
       name: 'Apollo',
       breed: 'Labrador',
       specie: 'dog',
-      owner: customer
+      ownerId: customer.id
     })
 
     await petsRepository.save(pet)
@@ -218,6 +218,6 @@ describe('Update pet use case', () => {
       ownerId: customer2.id
     })
 
-    expect(result.props.owner).toEqual(pet.props.owner)
+    expect(result.props.ownerId).toEqual(pet.props.ownerId)
   })
 })

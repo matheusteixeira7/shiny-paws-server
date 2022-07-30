@@ -1,4 +1,3 @@
-import { Customer } from '@domain/entities/customer'
 import { Entity } from '../../core/domain/Entity'
 
 type PetProps = {
@@ -6,7 +5,7 @@ type PetProps = {
   name: string
   specie: 'dog' | 'cat'
   breed: string
-  owner: Customer
+  ownerId: string
   createdAt?: Date
   updatedAt?: Date
 }

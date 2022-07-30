@@ -31,7 +31,7 @@ export class CreatePet {
       name,
       specie,
       breed,
-      owner: customer
+      ownerId: customer.id
     })
 
     this.petsRepository.save(newPet)

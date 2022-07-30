@@ -22,14 +22,14 @@ describe('List pets use case', () => {
       name: 'Apollo',
       specie: 'dog',
       breed: 'pitbull',
-      owner: customer
+      ownerId: customer.id
     })
 
     const pet2 = Pet.create({
       name: 'Apollo',
       specie: 'dog',
       breed: 'pitbull',
-      owner: customer
+      ownerId: customer.id
     })
 
     await petsRepository.save(pet1)

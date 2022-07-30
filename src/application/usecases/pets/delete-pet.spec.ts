@@ -32,7 +32,7 @@ describe('Delete pet use case', () => {
       name: 'Apollo',
       specie: 'dog',
       breed: 'labrador',
-      owner: customer
+      ownerId: customer.id
     })
 
     await petsRepository.save(pet)

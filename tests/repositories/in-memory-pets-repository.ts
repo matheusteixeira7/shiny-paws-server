@@ -15,7 +15,7 @@ export class InMemoryPetsRepository implements PetsRepository {
   }
 
   async findOwnerById (ownerId: string): Promise<Pet[]> {
-    return this.items.filter(pet => pet.props.owner.id === ownerId)
+    return this.items.filter(pet => pet.props.ownerId === ownerId)
   }
 
   async findByName (name: string): Promise<Pet | null> {
