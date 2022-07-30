@@ -1,5 +1,5 @@
 
-import { CreatePet, DeletePet, GetPet, ListPets, UpdatePet } from '@application/usecases/pets'
+import { CreatePet, DeletePet, GetPet, GetPetOwner, ListPets, UpdatePet } from '@application/usecases/pets'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
@@ -21,6 +21,13 @@ export class PetsController {
     const getPet = container.resolve(GetPet)
     const pet = await getPet.execute({ id })
     return res.json(pet)
+  }
+
+  async getOwner (req: Request, res: Response): Promise<Response> {
+    const { id } = req.params
+    const getPetOwner = container.resolve(GetPetOwner)
+    const petOwner = await getPetOwner.execute(id)
+    return res.json(petOwner)
   }
 
   async delete (req: Request, res: Response): Promise<Response> {
