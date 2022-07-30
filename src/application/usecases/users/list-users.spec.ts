@@ -1,12 +1,16 @@
-import { User } from '@domain/entities/user'
-import { InMemoryUsersRepository } from '@tests/repositories/in-memory-users-repository'
+import { User } from '@domain/entities'
+import { InMemoryUsersRepository } from '@tests/repositories'
 import { ListUsers } from './list-users'
 
-describe('List user use case', () => {
-  it('should be able to list users', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new ListUsers(usersRepository)
+let usersRepository: InMemoryUsersRepository
+let sut: ListUsers
 
+describe('List user use case', () => {
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository()
+    sut = new ListUsers(usersRepository)
+  })
+  it('should be able to list users', async () => {
     const user1 = User.create({
       name: 'Diego',
       email: 'doe@example.com',

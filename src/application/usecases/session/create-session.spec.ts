@@ -1,6 +1,6 @@
-import { User } from '@domain/entities/user'
-import { HashHandler } from '@infra/gateways/hash-handler'
-import { InMemoryUsersRepository } from '@tests/repositories/in-memory-users-repository'
+import { User } from '@domain/entities'
+import { HashHandler } from '@infra/gateways'
+import { InMemoryUsersRepository } from '@tests/repositories'
 import { CreateSession } from './create-session'
 
 let usersRepository: InMemoryUsersRepository

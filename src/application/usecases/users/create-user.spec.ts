@@ -1,12 +1,16 @@
-import { User } from '@domain/entities/user'
-import { InMemoryUsersRepository } from '@tests/repositories/in-memory-users-repository'
+import { User } from '@domain/entities'
+import { InMemoryUsersRepository } from '@tests/repositories'
 import { CreateUser } from './create-user'
 
-describe('Create user use case', () => {
-  it('should throw error if user already exists', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new CreateUser(usersRepository)
+let usersRepository: InMemoryUsersRepository
+let sut: CreateUser
 
+describe('Create user use case', () => {
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository()
+    sut = new CreateUser(usersRepository)
+  })
+  it('should throw error if user already exists', async () => {
     const user = User.create({
       name: 'Diego',
       email: 'doe@example.com',
@@ -23,9 +27,6 @@ describe('Create user use case', () => {
   })
 
   it('should be able to create a new user', async () => {
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new CreateUser(usersRepository)
-
     const user = await sut.execute({
       name: 'Diego',
       email: 'asd@email.com',
