@@ -21,8 +21,8 @@ describe('Create pet use case', () => {
       name: 'Apollo',
       specie: 'dog',
       breed: 'labrador',
-      owner: customer
-    })).rejects.toThrowError('Customer does not exist.')
+      ownerId: customer.id
+    })).rejects.toThrow()
   })
 
   it('should be able to create a new pet', async () => {
@@ -43,7 +43,7 @@ describe('Create pet use case', () => {
       name: 'Apollo',
       specie: 'dog',
       breed: 'pitbull',
-      owner: customer
+      ownerId: customer.id
     })
 
     expect(pet).toBeInstanceOf(Pet)

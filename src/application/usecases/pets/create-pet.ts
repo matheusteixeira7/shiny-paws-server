@@ -1,14 +1,14 @@
+import { InvalidParamError } from '@application/errors'
 import { CustomersRepository } from '@application/repositories/CustomersRepository'
 import { PetsRepository } from '@application/repositories/PetsRepository'
-import { Customer } from '@domain/entities/customer'
 import { Pet } from '@domain/entities/pet'
 import { inject, injectable } from 'tsyringe'
 
-type PetProps = {
+type PetPropsRequest = {
   name: string
   specie: 'dog' | 'cat'
   breed: string
-  owner: Customer
+  ownerId: string
 }
 
 @injectable()
@@ -21,18 +21,18 @@ export class CreatePet {
 
   ) {}
 
-  async execute ({ name, specie, breed, owner }: PetProps) {
-    const customer = await this.customersRepository.findById(owner.id)
+  async execute ({ name, specie, breed, ownerId }: PetPropsRequest) {
+    const customer = await this.customersRepository.findById(ownerId)
 
     if (!customer) {
-      throw new Error('Customer does not exist.')
+      throw new InvalidParamError('Customer does not exist.')
     }
 
     const newPet = Pet.create({
       name,
       specie,
       breed,
-      owner
+      owner: customer
     })
 
     this.petsRepository.save(newPet)
