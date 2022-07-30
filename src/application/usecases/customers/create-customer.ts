@@ -1,3 +1,4 @@
+import { InvalidParamError } from '@application/errors'
 import { CustomersRepository } from '@application/repositories/CustomersRepository'
 import { Customer } from '@domain/entities/customer'
 import { Pet } from '@domain/entities/pet'
@@ -22,7 +23,7 @@ export class CreateCustomer {
     const customer = await this.customersRepository.findByEmail(email)
 
     if (customer) {
-      throw new Error('Customer already exists.')
+      throw new InvalidParamError('Customer already exists.')
     }
 
     const newCustomer = Customer.create({
