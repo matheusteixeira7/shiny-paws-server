@@ -1,42 +1,45 @@
-import { Customer } from '@domain/entities/customer'
 import { PetsRepository } from '@application/repositories/PetsRepository'
 import { inject, injectable } from 'tsyringe'
+import { CustomersRepository } from '@application/repositories/CustomersRepository'
 
 type PetProps = {
   id: string
   name: string
   specie: 'dog' | 'cat'
   breed: string
-  owner: Customer
+  ownerId: string
 }
 
 @injectable()
 export class UpdatePet {
   constructor (
     @inject('InMemoryPetsRepository')
-    private petsRepository: PetsRepository
+    private petsRepository: PetsRepository,
+    @inject('InMemoryCustomersRepository')
+    private customersRepository: CustomersRepository
   ) {}
 
-  async execute ({ id, name, specie, breed, owner }: PetProps) {
+  async execute ({ id, name, specie, breed, ownerId }: PetProps) {
+    const petOwner = await this.customersRepository.findById(ownerId)
     const pet = await this.petsRepository.findById(id)
 
     if (!pet) {
       throw new Error('Pet not found.')
     }
 
-    const updatedPet = Object.assign({}, pet, {
+    Object.assign(pet, {
       props: {
         ...pet.props,
         name,
         specie,
         breed,
-        owner,
+        owner: petOwner,
         updatedAt: new Date()
       }
     })
 
-    this.petsRepository.save(updatedPet)
+    this.petsRepository.save(pet)
 
-    return updatedPet
+    return pet
   }
 }

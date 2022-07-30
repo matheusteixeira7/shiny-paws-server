@@ -1,12 +1,19 @@
 import { Customer } from '@domain/entities/customer'
 import { Pet } from '@domain/entities/pet'
+import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-customers-repository'
 import { InMemoryPetsRepository } from '@tests/repositories/in-memory-pets-repository'
 import { UpdatePet } from './update-pet'
 
+let petsRepository: InMemoryPetsRepository
+let customersRepository: InMemoryCustomersRepository
+
 describe('Update pet use case', () => {
+  beforeEach(() => {
+    petsRepository = new InMemoryPetsRepository()
+    customersRepository = new InMemoryCustomersRepository()
+  })
   it('should throw error if pet not found', async () => {
-    const petsRepository = new InMemoryPetsRepository()
-    const sut = new UpdatePet(petsRepository)
+    const sut = new UpdatePet(petsRepository, customersRepository)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -20,13 +27,12 @@ describe('Update pet use case', () => {
       name: 'Apollo',
       breed: 'Pitbull',
       specie: 'dog',
-      owner: customer
-    })).rejects.toThrowError('Pet not found.')
+      ownerId: customer.id
+    })).rejects.toThrow()
   })
 
   it('should be able to update pets name', async () => {
-    const petsRepository = new InMemoryPetsRepository()
-    const sut = new UpdatePet(petsRepository)
+    const sut = new UpdatePet(petsRepository, customersRepository)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -66,15 +72,14 @@ describe('Update pet use case', () => {
       name: 'Brownie',
       specie: 'dog' as const,
       breed: 'Pitbull',
-      owner: customer2
+      ownerId: customer2.id
     })
 
     expect(result.props.name).toEqual(updatedPet.props.name)
   })
 
   it('should be able to update pets specie', async () => {
-    const petsRepository = new InMemoryPetsRepository()
-    const sut = new UpdatePet(petsRepository)
+    const sut = new UpdatePet(petsRepository, customersRepository)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -114,15 +119,14 @@ describe('Update pet use case', () => {
       name: 'Brownie',
       specie: 'dog' as const,
       breed: 'Pitbull',
-      owner: customer2
+      ownerId: customer2.id
     })
 
     expect(result.props.specie).toEqual(updatedPet.props.specie)
   })
 
   it('should be able to update pets breed', async () => {
-    const petsRepository = new InMemoryPetsRepository()
-    const sut = new UpdatePet(petsRepository)
+    const sut = new UpdatePet(petsRepository, customersRepository)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -162,15 +166,14 @@ describe('Update pet use case', () => {
       name: 'Brownie',
       specie: 'dog' as const,
       breed: 'Pitbull',
-      owner: customer2
+      ownerId: customer2.id
     })
 
     expect(result.props.breed).toEqual(updatedPet.props.breed)
   })
 
   it('should be able to update pets owner', async () => {
-    const petsRepository = new InMemoryPetsRepository()
-    const sut = new UpdatePet(petsRepository)
+    const sut = new UpdatePet(petsRepository, customersRepository)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -195,7 +198,7 @@ describe('Update pet use case', () => {
 
     await petsRepository.save(pet)
 
-    const updatedPet = Object.assign({}, pet, {
+    Object.assign(pet, {
       props: {
         ...pet.props,
         name: 'Brownie',
@@ -210,9 +213,9 @@ describe('Update pet use case', () => {
       name: 'Brownie',
       specie: 'dog' as const,
       breed: 'Pitbull',
-      owner: customer2
+      ownerId: customer2.id
     })
 
-    expect(result.props.owner).toEqual(updatedPet.props.owner)
+    expect(result.props.owner).toEqual(pet.props.owner)
   })
 })
