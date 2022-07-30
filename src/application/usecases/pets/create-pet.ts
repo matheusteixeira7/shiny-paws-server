@@ -1,7 +1,6 @@
 import { InvalidParamError } from '@application/errors'
-import { CustomersRepository } from '@application/repositories/CustomersRepository'
-import { PetsRepository } from '@application/repositories/PetsRepository'
-import { Pet } from '@domain/entities/pet'
+import { CustomersRepository, PetsRepository } from '@application/repositories'
+import { Pet } from '@domain/entities'
 import { inject, injectable } from 'tsyringe'
 
 type PetPropsRequest = {

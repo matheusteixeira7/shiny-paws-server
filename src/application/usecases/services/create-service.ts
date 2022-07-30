@@ -1,6 +1,6 @@
-import { ServerError } from '@application/errors'
-import { ServicesRepository } from '@application/repositories/ServicesRepository'
-import { Service } from '@domain/entities/service'
+import { InvalidParamError } from '@application/errors'
+import { ServicesRepository } from '@application/repositories'
+import { Service } from '@domain/entities'
 import { inject, injectable } from 'tsyringe'
 
 type ServiceProps = {
@@ -18,7 +18,7 @@ export class CreateService {
     const service = await this.servicesRepository.findByName(name)
 
     if (service) {
-      throw new ServerError('Service already exists.')
+      throw new InvalidParamError('Service already exists.')
     }
 
     const newService = Service.create({

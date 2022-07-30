@@ -1,4 +1,5 @@
-import { PetsRepository } from '@application/repositories/PetsRepository'
+import { InvalidParamError } from '@application/errors'
+import { PetsRepository } from '@application/repositories'
 import { inject, injectable } from 'tsyringe'
 
 type PetProps = {
@@ -16,7 +17,7 @@ export class DeletePet {
     const pet = await this.petsRepository.findById(id)
 
     if (!pet) {
-      throw new Error('Pet not found.')
+      throw new InvalidParamError('Pet not found.')
     }
 
     this.petsRepository.delete(id)

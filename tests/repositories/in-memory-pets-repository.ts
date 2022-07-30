@@ -1,5 +1,5 @@
-import { PetsRepository } from '@application/repositories/PetsRepository'
-import { Pet } from '@domain/entities/pet'
+import { PetsRepository } from '@application/repositories'
+import { Pet } from '@domain/entities'
 
 export class InMemoryPetsRepository implements PetsRepository {
   public items: Pet[] = []

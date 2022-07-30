@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { celebrate, Segments, Joi } from 'celebrate'
-import { ServicesController } from '@infra/controllers/services-controller'
+import { ServicesController } from '@infra/controllers'
 
 export const servicesRouter = Router()
 const servicesController = new ServicesController()

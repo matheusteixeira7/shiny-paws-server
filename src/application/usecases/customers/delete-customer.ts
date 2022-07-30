@@ -1,5 +1,5 @@
 import { InvalidParamError } from '@application/errors'
-import { CustomersRepository } from '@application/repositories/CustomersRepository'
+import { CustomersRepository } from '@application/repositories'
 import { inject, injectable } from 'tsyringe'
 
 type CustomerProps = {

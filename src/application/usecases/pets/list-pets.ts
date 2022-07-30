@@ -1,4 +1,4 @@
-import { PetsRepository } from '@application/repositories/PetsRepository'
+import { PetsRepository } from '@application/repositories'
 import { inject, injectable } from 'tsyringe'
 
 @injectable()

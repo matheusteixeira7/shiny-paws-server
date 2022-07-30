@@ -1,4 +1,4 @@
-import { UsersController } from '@infra/controllers/users-controller'
+import { UsersController } from '@infra/controllers'
 import { Router } from 'express'
 import { celebrate, Joi, Segments } from 'celebrate'
 

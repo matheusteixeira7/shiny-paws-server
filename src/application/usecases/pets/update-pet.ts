@@ -1,6 +1,6 @@
-import { PetsRepository } from '@application/repositories/PetsRepository'
+import { InvalidParamError } from '@application/errors'
+import { PetsRepository, CustomersRepository } from '@application/repositories'
 import { inject, injectable } from 'tsyringe'
-import { CustomersRepository } from '@application/repositories/CustomersRepository'
 
 type PetProps = {
   id: string
@@ -24,7 +24,7 @@ export class UpdatePet {
     const pet = await this.petsRepository.findById(id)
 
     if (!pet) {
-      throw new Error('Pet not found.')
+      throw new InvalidParamError('Pet not found.')
     }
 
     Object.assign(pet, {

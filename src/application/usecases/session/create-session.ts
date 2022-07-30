@@ -1,8 +1,8 @@
-import { UsersRepository } from '@application/repositories/UsersRepository'
-import { User } from '@domain/entities/user'
-import { HashHandler } from '@infra/gateways/hash-handler'
+import { InvalidParamError } from '@application/errors'
+import { UsersRepository } from '@application/repositories'
+import { User } from '@domain/entities'
+import { HashHandler, JwtTokenHandler } from '@infra/gateways'
 import { inject, injectable } from 'tsyringe'
-import { JwtTokenHandler } from '@infra/gateways/jwt-token-handler'
 
 interface IRequest {
   email: string
@@ -25,13 +25,13 @@ export class CreateSession {
     const user = await this.usersRepository.findByEmail(email)
 
     if (!user) {
-      throw new Error('User not found.')
+      throw new InvalidParamError('User not found.')
     }
 
     const passwordConfirmed = await new HashHandler().compare(password, user.props.password)
 
     if (!passwordConfirmed) {
-      throw new Error('Incorrect password.')
+      throw new InvalidParamError('Incorrect password.')
     }
 
     const token = await new JwtTokenHandler().generate(user.id)

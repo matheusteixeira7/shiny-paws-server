@@ -1,5 +1,5 @@
-import { ServicesRepository } from '@application/repositories/ServicesRepository'
-import { Service } from '@domain/entities/service'
+import { ServicesRepository } from '@application/repositories'
+import { Service } from '@domain/entities'
 
 export class InMemoryServicesRepository implements ServicesRepository {
   public items: Service[] = []

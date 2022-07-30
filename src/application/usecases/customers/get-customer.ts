@@ -1,4 +1,5 @@
-import { CustomersRepository } from '@application/repositories/CustomersRepository'
+import { InvalidParamError } from '@application/errors'
+import { CustomersRepository } from '@application/repositories'
 import { inject, injectable } from 'tsyringe'
 
 type CustomerProps = {
@@ -16,7 +17,7 @@ export class GetCustomer {
     const customer = await this.customersRepository.findById(id)
 
     if (!customer) {
-      throw new Error('Customer not found.')
+      throw new InvalidParamError('Customer not found.')
     }
 
     return customer

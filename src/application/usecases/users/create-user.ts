@@ -1,8 +1,8 @@
-import { User } from '@domain/entities/user'
-import { HashHandler } from '@infra/gateways/hash-handler'
+import { User } from '@domain/entities'
+import { HashHandler } from '@infra/gateways'
 import { inject, injectable } from 'tsyringe'
-import { UsersRepository } from '@application/repositories/UsersRepository'
-import { EmailInUseError } from '@application/errors/email-in-use-error'
+import { UsersRepository } from '@application/repositories'
+import { EmailInUseError } from '@application/errors'
 
 type UserProps = {
   name: string

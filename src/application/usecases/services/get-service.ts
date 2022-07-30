@@ -1,4 +1,5 @@
-import { ServicesRepository } from '@application/repositories/ServicesRepository'
+import { InvalidParamError } from '@application/errors'
+import { ServicesRepository } from '@application/repositories'
 import { inject, injectable } from 'tsyringe'
 
 type UserProps = {
@@ -16,7 +17,7 @@ export class GetService {
     const service = await this.servicesRepository.findById(id)
 
     if (!service) {
-      throw new Error('Service not found.')
+      throw new InvalidParamError('Service not found.')
     }
 
     return service
