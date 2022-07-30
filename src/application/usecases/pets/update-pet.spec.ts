@@ -44,6 +44,9 @@ describe('Update pet use case', () => {
       address: '123 Main St'
     })
 
+    customersRepository.save(customer)
+    customersRepository.save(customer2)
+
     const pet = Pet.create({
       name: 'Apollo',
       breed: 'Labrador',
@@ -53,7 +56,7 @@ describe('Update pet use case', () => {
 
     await petsRepository.save(pet)
 
-    const updatedPet = Object.assign({}, pet, {
+    Object.assign(pet, {
       props: {
         ...pet.props,
         name: 'Brownie',
@@ -71,7 +74,7 @@ describe('Update pet use case', () => {
       ownerId: customer2.id
     })
 
-    expect(result.props.name).toEqual(updatedPet.props.name)
+    expect(result.props.name).toEqual(pet.props.name)
   })
 
   it('should be able to update pets specie', async () => {
@@ -88,6 +91,9 @@ describe('Update pet use case', () => {
       phone: '123456',
       address: '123 Main St'
     })
+
+    customersRepository.save(customer)
+    customersRepository.save(customer2)
 
     const pet = Pet.create({
       name: 'Apollo',
@@ -134,6 +140,9 @@ describe('Update pet use case', () => {
       address: '123 Main St'
     })
 
+    customersRepository.save(customer)
+    customersRepository.save(customer2)
+
     const pet = Pet.create({
       name: 'Apollo',
       breed: 'Labrador',
@@ -178,6 +187,9 @@ describe('Update pet use case', () => {
       phone: '123456',
       address: '123 Main St'
     })
+
+    customersRepository.save(customer)
+    customersRepository.save(customer2)
 
     const pet = Pet.create({
       name: 'Apollo',

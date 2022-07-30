@@ -21,6 +21,11 @@ export class UpdatePet {
 
   async execute ({ id, name, specie, breed, ownerId }: PetProps) {
     const petOwner = await this.customersRepository.findById(ownerId)
+
+    if (!petOwner) {
+      throw new InvalidParamError('Owner not found')
+    }
+
     const pet = await this.petsRepository.findById(id)
 
     if (!pet) {
