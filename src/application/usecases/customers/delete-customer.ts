@@ -1,3 +1,4 @@
+import { InvalidParamError } from '@application/errors'
 import { CustomersRepository } from '@application/repositories/CustomersRepository'
 import { inject, injectable } from 'tsyringe'
 
@@ -16,7 +17,7 @@ export class DeleteCustomer {
     const customer = await this.customersRepository.findById(id)
 
     if (!customer) {
-      throw new Error('Customer not found.')
+      throw new InvalidParamError('Customer not found.')
     }
 
     this.customersRepository.delete(id)
