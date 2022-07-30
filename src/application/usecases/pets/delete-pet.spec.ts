@@ -1,7 +1,5 @@
-import { Customer } from '@domain/entities/customer'
-import { Pet } from '@domain/entities/pet'
-import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-customers-repository'
-import { InMemoryPetsRepository } from '@tests/repositories/in-memory-pets-repository'
+import { Customer, Pet } from '@domain/entities'
+import { InMemoryCustomersRepository, InMemoryPetsRepository } from '@tests/repositories'
 import { DeletePet } from './delete-pet'
 
 let petsRepository: InMemoryPetsRepository
