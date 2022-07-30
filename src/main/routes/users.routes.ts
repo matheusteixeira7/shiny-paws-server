@@ -32,7 +32,9 @@ usersRouter.put('/:id',
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      email: Joi.string().email().required()
+      email: Joi.string().email().required(),
+      password: Joi.string(),
+      oldPassword: Joi.string()
     },
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()
