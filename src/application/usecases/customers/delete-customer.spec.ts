@@ -1,21 +1,22 @@
-import { Customer } from '@domain/entities/customer'
-import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-customers-repository'
+import { Customer } from '@domain/entities'
+import { InMemoryCustomersRepository } from '@tests/repositories'
 import { DeleteCustomer } from './delete-customer'
 
-describe('Delete customer use case', () => {
-  it('should throw error if customer not found', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new DeleteCustomer(customersRepository)
+let customersRepository: InMemoryCustomersRepository
+let sut: DeleteCustomer
 
+describe('Delete customer use case', () => {
+  beforeEach(() => {
+    customersRepository = new InMemoryCustomersRepository()
+    sut = new DeleteCustomer(customersRepository)
+  })
+  it('should throw error if customer not found', async () => {
     await expect(sut.execute({
       id: '1'
-    })).rejects.toThrowError('Customer not found.')
+    })).rejects.toThrow()
   })
 
   it('should be able to delete a customer', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new DeleteCustomer(customersRepository)
-
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',

@@ -2,11 +2,15 @@ import { Customer } from '@domain/entities/customer'
 import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-customers-repository'
 import { ListCustomers } from './list-customers'
 
-describe('List customers use case', () => {
-  it('should be able to list customers', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new ListCustomers(customersRepository)
+let customersRepository: InMemoryCustomersRepository
+let sut: ListCustomers
 
+describe('List customers use case', () => {
+  beforeEach(() => {
+    customersRepository = new InMemoryCustomersRepository()
+    sut = new ListCustomers(customersRepository)
+  })
+  it('should be able to list customers', async () => {
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',

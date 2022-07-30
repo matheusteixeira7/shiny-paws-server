@@ -1,12 +1,16 @@
-import { Customer } from '@domain/entities/customer'
-import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-customers-repository'
+import { Customer } from '@domain/entities'
+import { InMemoryCustomersRepository } from '@tests/repositories'
 import { CreateCustomer } from './create-customer'
 
-describe('Create customer use case', () => {
-  it('should throw error if customer already exists', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new CreateCustomer(customersRepository)
+let customersRepository: InMemoryCustomersRepository
+let sut: CreateCustomer
 
+describe('Create customer use case', () => {
+  beforeEach(() => {
+    customersRepository = new InMemoryCustomersRepository()
+    sut = new CreateCustomer(customersRepository)
+  })
+  it('should throw error if customer already exists', async () => {
     const customer = Customer.create({
       name: 'Diego',
       email: 'doe@example.com',
@@ -21,13 +25,10 @@ describe('Create customer use case', () => {
       email: 'doe@example.com',
       phone: '123456',
       address: '123 Main St'
-    })).rejects.toThrowError('Customer already exists.')
+    })).rejects.toThrow()
   })
 
   it('should be able to create a new user', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new CreateCustomer(customersRepository)
-
     const customer = await sut.execute({
       name: 'Diego',
       email: 'doe@example.com',

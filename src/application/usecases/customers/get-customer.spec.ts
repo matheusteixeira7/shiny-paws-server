@@ -1,21 +1,22 @@
-import { Customer } from '@domain/entities/customer'
-import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-customers-repository'
+import { Customer } from '@domain/entities'
+import { InMemoryCustomersRepository } from '@tests/repositories'
 import { GetCustomer } from './get-customer'
 
-describe('Get customer use case', () => {
-  it('should throw error if customer do not exists', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new GetCustomer(customersRepository)
+let customersRepository: InMemoryCustomersRepository
+let sut: GetCustomer
 
+describe('Get customer use case', () => {
+  beforeEach(() => {
+    customersRepository = new InMemoryCustomersRepository()
+    sut = new GetCustomer(customersRepository)
+  })
+  it('should throw error if customer do not exists', async () => {
     await expect(sut.execute({
       id: '1'
     })).rejects.toThrowError('Customer not found.')
   })
 
   it('should be able to get a customer', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new GetCustomer(customersRepository)
-
     const customer = Customer.create({
       name: 'Diego',
       email: 'doe@example.com',

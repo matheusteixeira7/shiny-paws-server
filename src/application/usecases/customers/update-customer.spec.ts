@@ -2,11 +2,15 @@ import { Customer } from '@domain/entities/customer'
 import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-customers-repository'
 import { UpdateCustomer } from './update-customer'
 
-describe('Update customer use case', () => {
-  it('should throw error if customer not found', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new UpdateCustomer(customersRepository)
+let customersRepository: InMemoryCustomersRepository
+let sut: UpdateCustomer
 
+describe('Update customer use case', () => {
+  beforeEach(() => {
+    customersRepository = new InMemoryCustomersRepository()
+    sut = new UpdateCustomer(customersRepository)
+  })
+  it('should throw error if customer not found', async () => {
     await expect(sut.execute({
       id: '1',
       name: 'Matheus Teixeira',
@@ -17,9 +21,6 @@ describe('Update customer use case', () => {
   })
 
   it('should be able to update customer name', async () => {
-    const customersRepository = new InMemoryCustomersRepository()
-    const sut = new UpdateCustomer(customersRepository)
-
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',
