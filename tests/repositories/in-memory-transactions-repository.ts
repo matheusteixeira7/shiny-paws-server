@@ -32,7 +32,7 @@ export class InMemoryTransactionsRepository implements TransactionsRepository {
     const index = this.items.findIndex(t => t.id === id)
 
     if (index === -1) {
-      throw new Error('Customer not found.')
+      throw new Error('Transaction not found.')
     }
 
     this.items.splice(index, 1)
