@@ -1,5 +1,5 @@
 import { Customer, Service } from '@domain/entities'
-import { InMemoryTransactionsRepository } from '@tests/repositories/in-memory-transactions-repository'
+import { InMemoryTransactionsRepository } from '@tests/repositories'
 import { CreateTransaction } from './create-transaction'
 
 let transactionsRepository: InMemoryTransactionsRepository
@@ -16,17 +16,20 @@ describe('CreateTransaction', () => {
       price: 120
     })
 
+    const service2 = Service.create({
+      name: 'Cortar unha',
+      price: 80
+    })
+
     const customer = Customer.create({
       name: 'John Doe',
       email: 'email@email.com',
       phone: '249999999',
       address: 'Rua Santos Dumont, 299'
-
     })
 
     const transaction = await sut.execute({
-      transaction: [service],
-      totalPrice: 120,
+      transaction: [service, service2],
       isPaid: false,
       customerId: customer.id
     })
