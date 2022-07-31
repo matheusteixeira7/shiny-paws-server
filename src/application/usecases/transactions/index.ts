@@ -1,3 +1,5 @@
 export * from './create-transaction'
 export * from './list-transactions'
 export * from './get-transaction'
+export * from './update-transaction'
+export * from './delete-transaction'
