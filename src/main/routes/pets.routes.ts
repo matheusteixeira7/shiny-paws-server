@@ -28,6 +28,15 @@ petsRouter.get('/:id',
   petsController.get
 )
 
+petsRouter.get('/getowner/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().uuid().required()
+    }
+  }),
+  petsController.getOwner
+)
+
 petsRouter.delete('/:id',
   celebrate({
     [Segments.PARAMS]: {
