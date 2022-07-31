@@ -32,7 +32,7 @@ describe('GetTransaction', () => {
     })
 
     const transaction = await createTransaction.execute({
-      transaction: [service],
+      services: [service],
       isPaid: false,
       customerId: customer.id
     })

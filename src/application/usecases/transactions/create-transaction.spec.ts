@@ -29,7 +29,7 @@ describe('CreateTransaction', () => {
     })
 
     const transaction = await sut.execute({
-      transaction: [service, service2],
+      services: [service, service2],
       isPaid: false,
       customerId: customer.id
     })

@@ -3,7 +3,7 @@ import { Service, Transaction } from '@domain/entities'
 import { injectable, inject } from 'tsyringe'
 
 type TransactionProps = {
-  transaction: Service[];
+  services: Service[];
   isPaid: boolean;
   customerId: string;
 };
@@ -16,16 +16,16 @@ export class CreateTransaction {
   ) {}
 
   async execute ({
-    transaction,
+    services,
     isPaid,
     customerId
   }: TransactionProps): Promise<Transaction> {
-    const total = transaction
+    const total = services
       .map((service) => service.props.price)
       .reduce((acc, curr) => acc + curr)
 
     const newTransaction = Transaction.create({
-      transaction,
+      services,
       totalPrice: total,
       isPaid,
       customerId

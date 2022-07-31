@@ -2,7 +2,7 @@ import { Entity } from '../../core/domain/Entity'
 import { Service } from './service'
 
 type TransactionProps = {
-  transaction: Service[]
+  services: Service[]
   totalPrice: number
   isPaid: boolean
   customerId: string

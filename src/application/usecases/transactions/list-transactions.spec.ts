@@ -25,14 +25,14 @@ describe('ListTransactions', () => {
     })
 
     const transaction = Transaction.create({
-      transaction: [service],
+      services: [service],
       totalPrice: 120,
       isPaid: false,
       customerId: customer.id
     })
 
     const transaction2 = Transaction.create({
-      transaction: [service],
+      services: [service],
       totalPrice: 120,
       isPaid: false,
       customerId: customer.id
