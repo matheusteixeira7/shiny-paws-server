@@ -3,11 +3,10 @@ import { Service, Transaction } from '@domain/entities'
 import { injectable, inject } from 'tsyringe'
 
 type TransactionProps = {
-  transaction: Service[]
-  totalPrice: number
-  isPaid: boolean
-  customerId: string
-}
+  transaction: Service[];
+  isPaid: boolean;
+  customerId: string;
+};
 
 @injectable()
 export class CreateTransaction {
@@ -16,10 +15,18 @@ export class CreateTransaction {
     private transactionsRepository: TransactionsRepository
   ) {}
 
-  async execute ({ transaction, totalPrice, isPaid, customerId }: TransactionProps): Promise<Transaction> {
+  async execute ({
+    transaction,
+    isPaid,
+    customerId
+  }: TransactionProps): Promise<Transaction> {
+    const total = transaction
+      .map((service) => service.props.price)
+      .reduce((acc, curr) => acc + curr)
+
     const newTransaction = Transaction.create({
       transaction,
-      totalPrice,
+      totalPrice: total,
       isPaid,
       customerId
     })
