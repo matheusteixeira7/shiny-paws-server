@@ -30,6 +30,8 @@ describe('UpdateTransaction', () => {
       address: 'Rua Santos Dumont, 299'
     })
 
+    await customersRepository.save(customer)
+
     expect(
       sut.execute({
         id: 'any',
@@ -52,6 +54,8 @@ describe('UpdateTransaction', () => {
       phone: '249999999',
       address: 'Rua Santos Dumont, 299'
     })
+
+    await customersRepository.save(customer)
 
     const transaction = await createTransaction.execute({
       services: [service],
@@ -92,6 +96,8 @@ describe('UpdateTransaction', () => {
       address: 'Rua Santos Dumont, 299'
     })
 
+    await customersRepository.save(customer)
+
     const transaction = await createTransaction.execute({
       services: [service],
       isPaid: false,
@@ -122,6 +128,8 @@ describe('UpdateTransaction', () => {
       phone: '249999999',
       address: 'Rua Santos Dumont, 299'
     })
+
+    await customersRepository.save(customer)
 
     const transaction = await createTransaction.execute({
       services: [service],
@@ -160,6 +168,9 @@ describe('UpdateTransaction', () => {
       phone: '249999999',
       address: 'Rua Santos Dumont, 299'
     })
+
+    await customersRepository.save(customer)
+    await customersRepository.save(customer2)
 
     const transaction = await createTransaction.execute({
       services: [service],

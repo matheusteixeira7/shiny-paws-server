@@ -33,6 +33,8 @@ describe('DeleteTransaction', () => {
       address: 'Rua Santos Dumont, 299'
     })
 
+    await customersRepository.save(customer)
+
     const transaction = await createTransaction.execute({
       services: [service],
       isPaid: false,

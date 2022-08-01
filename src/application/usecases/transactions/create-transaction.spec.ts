@@ -29,8 +29,13 @@ describe('CreateTransaction', () => {
   })
 
   it('should not be able to create a transaction without customer', async () => {
+    const service = Service.create({
+      name: 'Banho e tosa',
+      price: 120
+    })
+
     expect(sut.execute({
-      services: [],
+      services: [service],
       isPaid: false,
       customerId: ''
     })).rejects.toThrow()
@@ -53,6 +58,8 @@ describe('CreateTransaction', () => {
       phone: '249999999',
       address: 'Rua Santos Dumont, 299'
     })
+
+    await customersRepository.save(customer)
 
     const transaction = await sut.execute({
       services: [service, service2],
