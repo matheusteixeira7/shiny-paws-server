@@ -1,17 +1,19 @@
 import { Customer, Service } from '@domain/entities'
-import { InMemoryTransactionsRepository } from '@tests/repositories'
+import { InMemoryCustomersRepository, InMemoryTransactionsRepository } from '@tests/repositories'
 import { CreateTransaction } from './create-transaction'
 import { UpdateTransaction } from './update-transaction'
 import { setTimeout } from 'timers/promises'
 
 let transactionsRepository: InMemoryTransactionsRepository
+let customersRepository: InMemoryCustomersRepository
 let createTransaction: CreateTransaction
 let sut: UpdateTransaction
 
 describe('UpdateTransaction', () => {
   beforeEach(() => {
     transactionsRepository = new InMemoryTransactionsRepository()
-    createTransaction = new CreateTransaction(transactionsRepository)
+    customersRepository = new InMemoryCustomersRepository()
+    createTransaction = new CreateTransaction(transactionsRepository, customersRepository)
     sut = new UpdateTransaction(transactionsRepository)
   })
 

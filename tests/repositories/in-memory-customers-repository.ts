@@ -5,7 +5,7 @@ export class InMemoryCustomersRepository implements CustomersRepository {
   public items: Customer[] = []
 
   async findById (id: string): Promise<Customer | null> {
-    const customer = this.items.find(customer => customer.id === id)
+    const customer = this.items.find(c => c.id === id)
 
     if (!customer) {
       return null

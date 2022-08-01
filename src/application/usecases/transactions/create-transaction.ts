@@ -1,4 +1,4 @@
-import { TransactionsRepository } from '@application/repositories'
+import { CustomersRepository, TransactionsRepository } from '@application/repositories'
 import { Service, Transaction } from '@domain/entities'
 import { injectable, inject } from 'tsyringe'
 
@@ -12,7 +12,9 @@ type TransactionProps = {
 export class CreateTransaction {
   constructor (
     @inject('InMemoryTransactionsRepository')
-    private transactionsRepository: TransactionsRepository
+    private transactionsRepository: TransactionsRepository,
+    @inject('InMemoryCustomersRepository')
+    private customersRepository: CustomersRepository
   ) {}
 
   async execute ({
@@ -20,6 +22,10 @@ export class CreateTransaction {
     isPaid,
     customerId
   }: TransactionProps): Promise<Transaction> {
+    if (!services.length) {
+      throw new Error('Transaction must have at least one service')
+    }
+
     const total = services
       .map((service) => service.props.price)
       .reduce((acc, curr) => acc + curr)

@@ -1,16 +1,18 @@
-import { InMemoryTransactionsRepository } from '@tests/repositories'
+import { InMemoryCustomersRepository, InMemoryTransactionsRepository } from '@tests/repositories'
 import { Customer, Service } from '@domain/entities'
 import { CreateTransaction } from './create-transaction'
 import { DeleteTransaction } from './delete-transaction'
 
 let transactionsRepository: InMemoryTransactionsRepository
+let customersRepository: InMemoryCustomersRepository
 let createTransaction: CreateTransaction
 let sut: DeleteTransaction
 
 describe('DeleteTransaction', () => {
   beforeEach(() => {
     transactionsRepository = new InMemoryTransactionsRepository()
-    createTransaction = new CreateTransaction(transactionsRepository)
+    customersRepository = new InMemoryCustomersRepository()
+    createTransaction = new CreateTransaction(transactionsRepository, customersRepository)
     sut = new DeleteTransaction(transactionsRepository)
   })
 
