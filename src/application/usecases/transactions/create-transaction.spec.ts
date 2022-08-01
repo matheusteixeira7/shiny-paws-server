@@ -1,72 +1,79 @@
-import { Customer, Service } from '@domain/entities'
-import { InMemoryCustomersRepository, InMemoryTransactionsRepository } from '@tests/repositories'
+import { Customer, Service, Transaction } from '@domain/entities'
+import {
+  InMemoryCustomersRepository,
+  InMemoryServicesRepository,
+  InMemoryTransactionsRepository
+} from '@tests/repositories'
 import { CreateTransaction } from './create-transaction'
 
 let transactionsRepository: InMemoryTransactionsRepository
 let customersRepository: InMemoryCustomersRepository
+let servicesRepository: InMemoryServicesRepository
 let sut: CreateTransaction
 
 describe('CreateTransaction', () => {
   beforeEach(() => {
     transactionsRepository = new InMemoryTransactionsRepository()
     customersRepository = new InMemoryCustomersRepository()
-    sut = new CreateTransaction(transactionsRepository, customersRepository)
+    servicesRepository = new InMemoryServicesRepository()
+    sut = new CreateTransaction(
+      transactionsRepository,
+      customersRepository,
+      servicesRepository
+    )
   })
 
   it('should not be able to create a transaction without services', async () => {
-    const customer = await Customer.create({
-      name: 'John Doe',
-      email: 'doe@email.com',
-      phone: '+5511999999999',
-      address: '123 Main St'
-    })
-
-    expect(sut.execute({
+    const transaction = sut.execute({
       services: [],
       isPaid: false,
-      customerId: customer.id
-    })).rejects.toThrow()
+      customerId: 'any-id'
+    })
+
+    expect(transaction).rejects.toThrow()
   })
 
-  it('should not be able to create a transaction without customer', async () => {
+  it('should not be able to create a transaction if provided customer is not found', async () => {
     const service = Service.create({
-      name: 'Banho e tosa',
+      name: 'any',
       price: 120
     })
 
-    expect(sut.execute({
+    const transaction = sut.execute({
       services: [service],
       isPaid: false,
-      customerId: ''
-    })).rejects.toThrow()
+      customerId: 'any-id'
+    })
+
+    expect(transaction).rejects.toThrow()
   })
 
-  it('should return a transaction', async () => {
+  it('should not be able to create a transaction if one or more provided service is not found', async () => {
     const service = Service.create({
-      name: 'Banho e tosa',
+      name: 'any',
       price: 120
     })
 
     const service2 = Service.create({
-      name: 'Cortar unha',
-      price: 80
+      name: 'any',
+      price: 120
     })
+
+    await servicesRepository.save(service)
 
     const customer = Customer.create({
-      name: 'John Doe',
-      email: 'email@email.com',
-      phone: '249999999',
-      address: 'Rua Santos Dumont, 299'
+      name: 'any',
+      address: 'any',
+      email: 'any',
+      phone: 'any'
     })
 
-    await customersRepository.save(customer)
-
-    const transaction = await sut.execute({
+    const transaction = sut.execute({
       services: [service, service2],
       isPaid: false,
       customerId: customer.id
     })
 
-    expect(transaction).toHaveProperty('id')
+    expect(transaction).rejects.toThrow()
   })
 })

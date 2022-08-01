@@ -14,6 +14,10 @@ export class InMemoryServicesRepository implements ServicesRepository {
     return service
   }
 
+  async findAllByIds (servicesIds: string[]): Promise<Service[] | null> {
+
+  }
+
   async findByName (name: string): Promise<Service | null> {
     const service = this.items.find(service => service.props.name === name)
 

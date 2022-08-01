@@ -1,11 +1,15 @@
-import { CustomersRepository, TransactionsRepository } from '@application/repositories'
+import {
+  CustomersRepository,
+  ServicesRepository,
+  TransactionsRepository
+} from '@application/repositories'
 import { Service, Transaction } from '@domain/entities'
 import { injectable, inject } from 'tsyringe'
 
 type TransactionProps = {
-  services: Service[];
-  isPaid: boolean;
-  customerId: string;
+  services: Service[]
+  isPaid: boolean
+  customerId: string
 };
 
 @injectable()
@@ -14,7 +18,9 @@ export class CreateTransaction {
     @inject('InMemoryTransactionsRepository')
     private transactionsRepository: TransactionsRepository,
     @inject('InMemoryCustomersRepository')
-    private customersRepository: CustomersRepository
+    private customersRepository: CustomersRepository,
+    @inject('InMemoryServicesRepository')
+    private servicesRepository: ServicesRepository
   ) {}
 
   async execute ({
@@ -22,23 +28,14 @@ export class CreateTransaction {
     isPaid,
     customerId
   }: TransactionProps): Promise<Transaction> {
-    if (!services.length) {
-      throw new Error('Transaction must have at least one service')
+    if (services.length === 0) {
+      throw new Error('No services provided.')
     }
 
-    const total = services
-      .map((service) => service.props.price)
-      .reduce((acc, curr) => acc + curr)
+    const customer = await this.customersRepository.findById(customerId)
 
-    const newTransaction = Transaction.create({
-      services,
-      totalPrice: total,
-      isPaid,
-      customerId
-    })
-
-    this.transactionsRepository.save(newTransaction)
-
-    return newTransaction
+    if (!customer) {
+      throw new Error('Customer not found')
+    }
   }
 }
