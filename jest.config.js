@@ -1,7 +1,3 @@
-
-const pathsToModuleNameMapper = require('ts-jest/').pathsToModuleNameMapper
-const compilerOptions = require('./tsconfig.json').compilerOptions
-
 module.exports = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   clearMocks: true,
@@ -10,15 +6,25 @@ module.exports = {
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',
   coverageReporters: ['text-summary', 'lcov'],
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/'
-  }),
+  roots: [
+    '<rootDir>'
+  ],
+  moduleNameMapper: {
+    '@application/(.*)': '<rootDir>/src/application/$1',
+    '@core/(.*)': '<rootDir>/src/core/$1',
+    '@domain/(.*)': '<rootDir>/src/domain/$1',
+    '@infra/(.*)': '<rootDir>/src/infra/$1',
+    '@main/(.*)': '<rootDir>/src/main/$1',
+    '@tests/(.*)': '<rootDir>/tests/$1'
+  },
   coveragePathIgnorePatterns: [
     'index.js',
     'index.jsx',
     'index.ts'
   ],
-  preset: 'ts-jest',
   testEnvironment: 'node',
-  testMatch: ['**/*.spec.ts']
+  testMatch: ['**/*.spec.ts'],
+  transform: {
+    '^.+\\.(t|j)sx?$': ['@swc/jest']
+  }
 }
