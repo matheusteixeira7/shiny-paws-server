@@ -37,5 +37,16 @@ export class CreateTransaction {
     if (!customer) {
       throw new Error('Customer not found')
     }
+
+    const transaction = Transaction.create({
+      customerId,
+      isPaid,
+      services,
+      totalPrice: services.reduce((acc, service) => acc + service.props.price, 0)
+    })
+
+    await this.transactionsRepository.save(transaction)
+
+    return transaction
   }
 }

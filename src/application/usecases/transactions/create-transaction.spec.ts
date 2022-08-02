@@ -1,4 +1,4 @@
-import { Customer, Service, Transaction } from '@domain/entities'
+import { Customer, Service } from '@domain/entities'
 import {
   InMemoryCustomersRepository,
   InMemoryServicesRepository,
@@ -48,7 +48,7 @@ describe('CreateTransaction', () => {
     expect(transaction).rejects.toThrow()
   })
 
-  it('should not be able to create a transaction if one or more provided service is not found', async () => {
+  it('should be able to create a transaction', async () => {
     const service = Service.create({
       name: 'any',
       price: 120
@@ -60,6 +60,7 @@ describe('CreateTransaction', () => {
     })
 
     await servicesRepository.save(service)
+    await servicesRepository.save(service2)
 
     const customer = Customer.create({
       name: 'any',
@@ -68,12 +69,14 @@ describe('CreateTransaction', () => {
       phone: 'any'
     })
 
-    const transaction = sut.execute({
+    await customersRepository.save(customer)
+
+    const transaction = await sut.execute({
       services: [service, service2],
       isPaid: false,
       customerId: customer.id
     })
 
-    expect(transaction).rejects.toThrow()
+    expect(transaction).toHaveProperty('id')
   })
 })
