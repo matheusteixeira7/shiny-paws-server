@@ -1,11 +1,11 @@
 {
-  "name": "02-node-api",
+  "name": "pets-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx --fix",
-    "dev": "clear && ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/main/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/main/server.ts",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "clear && jest --no-cache --passWithNoTests --silent --noStackTrace --runInBand",
     "test-verbose": "clear && jest --passWithNoTests --runInBand",
