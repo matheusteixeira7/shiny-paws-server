@@ -22,7 +22,7 @@ module.exports = {
     'index.jsx',
     'index.ts'
   ],
-  modulePathIgnorePatterns: ['<rootDir>/pgdata/'],
+  modulePathIgnorePatterns: ['<rootDir>/pgdata'],
   testEnvironment: 'node',
   testMatch: ['**/*.spec.ts'],
   transform: {
