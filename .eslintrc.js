@@ -18,5 +18,8 @@ module.exports = {
   rules: {
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': 'error'
+  },
+  globals: {
+    NodeJS: true
   }
 }
