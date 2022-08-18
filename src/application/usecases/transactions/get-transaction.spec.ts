@@ -48,7 +48,7 @@ describe('GetTransaction', () => {
     await customersRepository.save(customer)
 
     const transaction = await createTransaction.execute({
-      services: [service],
+      servicesIds: [service.id],
       isPaid: false,
       customerId: customer.id
     })

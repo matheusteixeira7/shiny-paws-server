@@ -3,11 +3,11 @@ import {
   ServicesRepository,
   TransactionsRepository
 } from '@application/repositories'
-import { Service, Transaction } from '@domain/entities'
+import { Transaction } from '@domain/entities'
 import { injectable, inject } from 'tsyringe'
 
-type TransactionProps = {
-  services: Service[]
+type CreateTransactionProps = {
+  servicesIds: string[]
   isPaid: boolean
   customerId: string
 };
@@ -24,13 +24,15 @@ export class CreateTransaction {
   ) {}
 
   async execute ({
-    services,
+    servicesIds,
     isPaid,
     customerId
-  }: TransactionProps): Promise<Transaction> {
-    if (services.length === 0) {
+  }: CreateTransactionProps): Promise<Transaction> {
+    if (servicesIds.length === 0) {
       throw new Error('No services provided.')
     }
+
+    const services = await this.servicesRepository.findByIds(servicesIds)
 
     const customer = await this.customersRepository.findById(customerId)
 
@@ -41,7 +43,7 @@ export class CreateTransaction {
     const transaction = Transaction.create({
       customerId,
       isPaid,
-      services,
+      servicesIds,
       totalPrice: services.reduce((acc, service) => acc + service.props.price, 0)
     })
 

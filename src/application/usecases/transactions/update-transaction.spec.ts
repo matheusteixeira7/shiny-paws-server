@@ -70,7 +70,7 @@ describe('UpdateTransaction', () => {
     await customersRepository.save(customer)
 
     const transaction = await createTransaction.execute({
-      services: [service],
+      servicesIds: [service.id],
       isPaid: false,
       customerId: customer.id
     })
@@ -114,7 +114,7 @@ describe('UpdateTransaction', () => {
     await customersRepository.save(customer)
 
     const transaction = await createTransaction.execute({
-      services: [service],
+      servicesIds: [service.id],
       isPaid: false,
       customerId: customer.id
     })
@@ -124,11 +124,11 @@ describe('UpdateTransaction', () => {
     const updated = Object.assign({}, transaction, {
       props: {
         ...transaction.props,
-        services: [service, service2],
+        servicesIds: [service.id, service2.id],
         updatedAt: new Date()
       }
     })
-    expect(updated.props.services).not.toEqual(transaction.props.services)
+    expect(updated.props.servicesIds).not.toEqual(transaction.props.servicesIds)
   })
 
   it('should be able to update transactions isPaid.', async () => {
@@ -149,7 +149,7 @@ describe('UpdateTransaction', () => {
     await customersRepository.save(customer)
 
     const transaction = await createTransaction.execute({
-      services: [service],
+      servicesIds: [service.id],
       isPaid: false,
       customerId: customer.id
     })
@@ -192,7 +192,7 @@ describe('UpdateTransaction', () => {
     await customersRepository.save(customer2)
 
     const transaction = await createTransaction.execute({
-      services: [service],
+      servicesIds: [service.id],
       isPaid: false,
       customerId: customer.id
     })

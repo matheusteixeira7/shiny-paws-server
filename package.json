@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "prisma": {
-    "schema": "./src/infra/prisma/schema.prisma"
+    "schema": "./src/infra/repos/postgres/prisma/schema.prisma"
   },
   "devDependencies": {
     "@swc/core": "^1.2.220",

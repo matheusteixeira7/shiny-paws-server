@@ -25,7 +25,7 @@ describe('CreateTransaction', () => {
 
   it('should not be able to create a transaction without services', async () => {
     const transaction = sut.execute({
-      services: [],
+      servicesIds: [],
       isPaid: false,
       customerId: 'any-id'
     })
@@ -40,7 +40,7 @@ describe('CreateTransaction', () => {
     })
 
     const transaction = sut.execute({
-      services: [service],
+      servicesIds: [service.id],
       isPaid: false,
       customerId: 'any-id'
     })
@@ -72,7 +72,7 @@ describe('CreateTransaction', () => {
     await customersRepository.save(customer)
 
     const transaction = await sut.execute({
-      services: [service, service2],
+      servicesIds: [service.id, service2.id],
       isPaid: false,
       customerId: customer.id
     })

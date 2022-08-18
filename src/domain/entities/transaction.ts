@@ -1,8 +1,7 @@
-import { Entity } from '../../core/domain/Entity'
-import { Service } from './service'
+import { Entity } from '@core/domain/Entity'
 
 type TransactionProps = {
-  services: Service[]
+  servicesIds: string[]
   totalPrice: number
   isPaid: boolean
   customerId: string
