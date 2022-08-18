@@ -36,22 +36,20 @@ export class UpdateUser {
     }
 
     if (password && oldPassword) {
-      const checkOldPassword = await new HashHandler().compare(oldPassword, user.props.password)
+      const checkOldPassword = await new HashHandler().compare(oldPassword, user.password)
 
       if (!checkOldPassword) {
         throw new Error('Old password does not match')
       }
 
-      user.props.password = await new HashHandler().generate(password)
+      user.password = await new HashHandler().generate(password)
     }
 
     Object.assign(user, {
-      props: {
-        ...user.props,
-        name,
-        email,
-        updatedAt: new Date()
-      }
+      ...user,
+      name,
+      email,
+      updatedAt: new Date()
     })
 
     this.usersRepository.save(user)

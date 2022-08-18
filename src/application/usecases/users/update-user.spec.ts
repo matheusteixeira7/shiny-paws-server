@@ -74,7 +74,7 @@ describe('Update user use case', () => {
 
     Object.assign(user, {
       props: {
-        ...user.props,
+        ...user,
         name: 'Matheus',
         email: 'doe@example.com'
       }
@@ -86,7 +86,7 @@ describe('Update user use case', () => {
       email: 'doe@example.com'
     })
 
-    expect(result.props.name).toEqual(user.props.name)
+    expect(result.name).toEqual(user.name)
   })
 
   it('should be able to update a user email', async () => {
@@ -100,7 +100,7 @@ describe('Update user use case', () => {
 
     Object.assign(user, {
       props: {
-        ...user.props,
+        ...user,
         name: 'Matheus',
         email: 'doe@example.com'
       }
@@ -112,7 +112,7 @@ describe('Update user use case', () => {
       email: 'doe@example.com'
     })
 
-    expect(result.props.email).toEqual(user.props.email)
+    expect(result.email).toEqual(user.email)
   })
 
   it('should not be able to update password if old password is not provided', async () => {
@@ -142,13 +142,11 @@ describe('Update user use case', () => {
     await usersRepository.save(user)
 
     Object.assign(user, {
-      props: {
-        ...user.props,
-        name: 'John Doe',
-        email: 'doe@email.com',
-        password: await new HashHandler().generate('123456'),
-        updatedAt: new Date()
-      }
+      ...user,
+      name: 'John Doe',
+      email: 'doe@email.com',
+      password: await new HashHandler().generate('123456'),
+      updatedAt: new Date()
     })
 
     const result = await sut.execute({

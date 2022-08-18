@@ -80,12 +80,10 @@ describe('UpdateTransaction', () => {
     async function UpdatedTransaction () {
       await setTimeout(2000)
       const updated = Object.assign({}, transaction, {
-        props: {
-          ...transaction.props,
-          updatedAt: new Date()
-        }
+        ...transaction,
+        updatedAt: new Date()
       })
-      expect(updated.props.updatedAt).not.toEqual(transaction.props.updatedAt)
+      expect(updated.updatedAt).not.toEqual(transaction.updatedAt)
     }
     UpdatedTransaction()
   })
@@ -122,13 +120,11 @@ describe('UpdateTransaction', () => {
     transactionsRepository.save(transaction)
 
     const updated = Object.assign({}, transaction, {
-      props: {
-        ...transaction.props,
-        servicesIds: [service.id, service2.id],
-        updatedAt: new Date()
-      }
+      ...transaction,
+      servicesIds: [service.id, service2.id],
+      updatedAt: new Date()
     })
-    expect(updated.props.servicesIds).not.toEqual(transaction.props.servicesIds)
+    expect(updated.servicesIds).not.toEqual(transaction.servicesIds)
   })
 
   it('should be able to update transactions isPaid.', async () => {
@@ -157,13 +153,11 @@ describe('UpdateTransaction', () => {
     transactionsRepository.save(transaction)
 
     const updated = Object.assign({}, transaction, {
-      props: {
-        ...transaction.props,
-        isPaid: true,
-        updatedAt: new Date()
-      }
+      ...transaction,
+      isPaid: true,
+      updatedAt: new Date()
     })
-    expect(updated.props.isPaid).not.toEqual(transaction.props.isPaid)
+    expect(updated.isPaid).not.toEqual(transaction.isPaid)
   })
 
   it('should be able to update transactions customerId.', async () => {
@@ -200,12 +194,10 @@ describe('UpdateTransaction', () => {
     transactionsRepository.save(transaction)
 
     const updated = Object.assign({}, transaction, {
-      props: {
-        ...transaction.props,
-        customerId: customer2.id,
-        updatedAt: new Date()
-      }
+      ...transaction,
+      customerId: customer2.id,
+      updatedAt: new Date()
     })
-    expect(updated.props.customerId).not.toEqual(transaction.props.customerId)
+    expect(updated.customerId).not.toEqual(transaction.customerId)
   })
 })

@@ -28,7 +28,7 @@ export class CreateSession {
       throw new InvalidParamError('User not found.')
     }
 
-    const passwordConfirmed = await new HashHandler().compare(password, user.props.password)
+    const passwordConfirmed = await new HashHandler().compare(password, user.password)
 
     if (!passwordConfirmed) {
       throw new InvalidParamError('Incorrect password.')

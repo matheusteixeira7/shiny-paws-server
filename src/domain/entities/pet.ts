@@ -1,6 +1,13 @@
-import { Entity } from '../../core/domain/Entity'
+import { randomUUID } from 'crypto'
 
-type PetProps = {
+type IPetProps = {
+  name: string
+  specie: 'dog' | 'cat'
+  breed: string
+  ownerId: string
+}
+
+export class Pet {
   id?: string
   name: string
   specie: 'dog' | 'cat'
@@ -8,20 +15,18 @@ type PetProps = {
   ownerId: string
   createdAt?: Date
   updatedAt?: Date
-}
 
-export class Pet extends Entity<PetProps> {
-  private constructor (props: PetProps, id?: string) {
-    super(props, id)
+  private constructor (props: IPetProps) {
+    this.id = randomUUID()
+    this.name = props.name
+    this.specie = props.specie
+    this.breed = props.breed
+    this.ownerId = props.ownerId
+    this.createdAt = new Date()
+    this.updatedAt = new Date()
   }
 
-  static create (props: PetProps, id?: string) {
-    const pet = new Pet({
-      ...props,
-      createdAt: props.createdAt ?? new Date(),
-      updatedAt: props.updatedAt ?? new Date()
-    }, id)
-
-    return pet
+  static create (props: IPetProps) {
+    return new Pet(props)
   }
 }

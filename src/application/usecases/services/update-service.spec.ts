@@ -27,11 +27,9 @@ describe('Update service use case', () => {
     await servicesRepository.save(service)
 
     const updatedService = Object.assign({}, service, {
-      props: {
-        ...service.props,
-        name: 'Tosa',
-        price: 60
-      }
+      ...service,
+      name: 'Tosa',
+      price: 60
     })
 
     const result = await sut.execute({
@@ -40,7 +38,7 @@ describe('Update service use case', () => {
       price: 60
     })
 
-    expect(result.props.name).toEqual(updatedService.props.name)
+    expect(result.name).toEqual(updatedService.name)
   })
 
   it('should be able to update services price', async () => {
@@ -52,11 +50,9 @@ describe('Update service use case', () => {
     await servicesRepository.save(service)
 
     const updatedService = Object.assign({}, service, {
-      props: {
-        ...service.props,
-        name: 'Tosa',
-        price: 60
-      }
+      ...service,
+      name: 'Tosa',
+      price: 60
     })
 
     const result = await sut.execute({
@@ -65,6 +61,6 @@ describe('Update service use case', () => {
       price: 60
     })
 
-    expect(result.props.price).toEqual(updatedService.props.price)
+    expect(result.price).toEqual(updatedService.price)
   })
 })

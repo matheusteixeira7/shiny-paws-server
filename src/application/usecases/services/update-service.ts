@@ -29,11 +29,9 @@ export class UpdateService {
     }
 
     Object.assign(service, {
-      props: {
-        ...service.props,
-        name,
-        price
-      }
+      ...service,
+      name,
+      price
     })
 
     this.servicesRepository.save(service)

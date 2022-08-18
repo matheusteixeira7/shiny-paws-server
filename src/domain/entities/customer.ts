@@ -1,26 +1,32 @@
-import { Entity } from '../../core/domain/Entity'
+import { randomUUID } from 'crypto'
 
-type CustomerProps = {
+type ICustomerProps = {
+  name: string
+  email: string
+  phone: string
+  address: string
+}
+
+export class Customer {
+  id: string
   name: string
   email: string
   phone: string
   address: string
   createdAt?: Date
   updatedAt?: Date
-}
 
-export class Customer extends Entity<CustomerProps> {
-  private constructor (props: CustomerProps, id?: string) {
-    super(props, id)
+  private constructor (props: ICustomerProps) {
+    this.id = randomUUID()
+    this.name = props.name
+    this.email = props.email
+    this.phone = props.phone
+    this.address = props.address
+    this.createdAt = new Date()
+    this.updatedAt = new Date()
   }
 
-  static create (props: CustomerProps, id?: string) {
-    const customer = new Customer({
-      ...props,
-      createdAt: props.createdAt ?? new Date(),
-      updatedAt: props.createdAt ?? new Date()
-    }, id)
-
-    return customer
+  static create (props: ICustomerProps) {
+    return new Customer(props)
   }
 }

@@ -15,7 +15,7 @@ export class InMemoryCustomersRepository implements CustomersRepository {
   }
 
   async findByEmail (email: string): Promise<Customer | null> {
-    const customer = this.items.find(customer => customer.props.email === email)
+    const customer = this.items.find(customer => customer.email === email)
 
     if (!customer) {
       return null

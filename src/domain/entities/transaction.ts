@@ -1,26 +1,32 @@
-import { Entity } from '@core/domain/Entity'
+import { randomUUID } from 'crypto'
 
-type TransactionProps = {
+type ITransactionProps = {
+  servicesIds: string[]
+  totalPrice: number
+  isPaid: boolean
+  customerId: string
+}
+
+export class Transaction {
+  id: string
   servicesIds: string[]
   totalPrice: number
   isPaid: boolean
   customerId: string
   createdAt?: Date
   updatedAt?: Date
-}
 
-export class Transaction extends Entity<TransactionProps> {
-  private constructor (props: TransactionProps, id?: string) {
-    super(props, id)
+  private constructor (props: ITransactionProps) {
+    this.id = randomUUID()
+    this.servicesIds = props.servicesIds
+    this.totalPrice = props.totalPrice
+    this.isPaid = props.isPaid
+    this.customerId = props.customerId
+    this.createdAt = new Date()
+    this.updatedAt = new Date()
   }
 
-  static create (props: TransactionProps, id?: string) {
-    const transaction = new Transaction({
-      ...props,
-      createdAt: props.createdAt ?? new Date(),
-      updatedAt: props.updatedAt ?? new Date()
-    }, id)
-
-    return transaction
+  static create (props: ITransactionProps) {
+    return new Transaction(props)
   }
 }

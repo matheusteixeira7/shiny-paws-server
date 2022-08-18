@@ -19,7 +19,7 @@ export class InMemoryServicesRepository implements ServicesRepository {
   }
 
   async findByName (name: string): Promise<Service | null> {
-    const service = this.items.find(service => service.props.name === name)
+    const service = this.items.find(service => service.name === name)
 
     if (!service) {
       return null

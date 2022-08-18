@@ -17,6 +17,7 @@ describe('Create user use case', () => {
       password: '123456'
     })
 
+    console.log(user)
     usersRepository.items.push(user)
 
     await expect(sut.execute({
