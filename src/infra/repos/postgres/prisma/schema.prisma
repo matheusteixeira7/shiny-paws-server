@@ -23,8 +23,8 @@ model Service {
   id        String   @unique
   name      String   @unique
   price     Int
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Pet {
@@ -34,8 +34,8 @@ model Pet {
   breed     String
   owner     Customer @relation(fields: [ownerId], references: [id])
   ownerId   String
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
 
 model Customer {
@@ -44,8 +44,8 @@ model Customer {
   email        String        @unique
   phone        String
   address      String
-  createdAt    DateTime
-  updatedAt    DateTime
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @default(now())
   pets         Pet[]
   transactions Transaction[]
 }
@@ -57,6 +57,6 @@ model Transaction {
   isPaid      Boolean
   totalPrice  Int
   servicesIds String[]
-  createdAt   DateTime
-  updatedAt   DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 }
