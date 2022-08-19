@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { customersRouter } from './customers.routes'
-import { petsRouter } from './pets.routes'
-import { servicesRouter } from './services.router'
+import { customersRouter } from './customer.routes'
+import { petsRouter } from './pet.routes'
+import { servicesRouter } from './service.router'
 import { sessionRouter } from './session.routes'
-import { transactionsRouter } from './transactions-routes'
-import { usersRouter } from './users.routes'
+import { transactionsRouter } from './transaction.routes'
+import { usersRouter } from './user.routes'
 
 export const routes = Router()
 
