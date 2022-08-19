@@ -57,13 +57,11 @@ describe('Update pet use case', () => {
     await petsRepository.save(pet)
 
     Object.assign(pet, {
-      props: {
-        ...pet.props,
-        name: 'Brownie',
-        specie: 'dog' as const,
-        breed: 'Pitbull',
-        owner: customer2
-      }
+      ...pet,
+      name: 'Brownie',
+      specie: 'dog' as const,
+      breed: 'Pitbull',
+      owner: customer2
     })
 
     const result = await sut.execute({
@@ -74,7 +72,7 @@ describe('Update pet use case', () => {
       ownerId: customer2.id
     })
 
-    expect(result.props.name).toEqual(pet.props.name)
+    expect(result.name).toEqual(pet.name)
   })
 
   it('should be able to update pets specie', async () => {
@@ -105,13 +103,11 @@ describe('Update pet use case', () => {
     await petsRepository.save(pet)
 
     const updatedPet = Object.assign({}, pet, {
-      props: {
-        ...pet.props,
-        name: 'Brownie',
-        specie: 'dog' as const,
-        breed: 'Pitbull',
-        owner: customer2
-      }
+      ...pet,
+      name: 'Brownie',
+      specie: 'dog' as const,
+      breed: 'Pitbull',
+      owner: customer2
     })
 
     const result = await sut.execute({
@@ -122,7 +118,7 @@ describe('Update pet use case', () => {
       ownerId: customer2.id
     })
 
-    expect(result.props.specie).toEqual(updatedPet.props.specie)
+    expect(result.specie).toEqual(updatedPet.specie)
   })
 
   it('should be able to update pets breed', async () => {
@@ -153,13 +149,11 @@ describe('Update pet use case', () => {
     await petsRepository.save(pet)
 
     const updatedPet = Object.assign({}, pet, {
-      props: {
-        ...pet.props,
-        name: 'Brownie',
-        specie: 'dog' as const,
-        breed: 'Pitbull',
-        owner: customer2
-      }
+      ...pet,
+      name: 'Brownie',
+      specie: 'dog' as const,
+      breed: 'Pitbull',
+      owner: customer2
     })
 
     const result = await sut.execute({
@@ -170,7 +164,7 @@ describe('Update pet use case', () => {
       ownerId: customer2.id
     })
 
-    expect(result.props.breed).toEqual(updatedPet.props.breed)
+    expect(result.breed).toEqual(updatedPet.breed)
   })
 
   it('should be able to update pets owner', async () => {
@@ -201,13 +195,11 @@ describe('Update pet use case', () => {
     await petsRepository.save(pet)
 
     Object.assign(pet, {
-      props: {
-        ...pet.props,
-        name: 'Brownie',
-        specie: 'dog' as const,
-        breed: 'Pitbull',
-        owner: customer2
-      }
+      ...pet,
+      name: 'Brownie',
+      specie: 'dog' as const,
+      breed: 'Pitbull',
+      owner: customer2
     })
 
     const result = await sut.execute({
@@ -218,6 +210,6 @@ describe('Update pet use case', () => {
       ownerId: customer2.id
     })
 
-    expect(result.props.ownerId).toEqual(pet.props.ownerId)
+    expect(result.ownerId).toEqual(pet.ownerId)
   })
 })

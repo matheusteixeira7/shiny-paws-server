@@ -1,4 +1,4 @@
-import { Pet } from '@domain/entities/pet'
+import { Pet } from '@domain/entities'
 
 export interface PetsRepository {
   findById(id: string): Promise<Pet | null>

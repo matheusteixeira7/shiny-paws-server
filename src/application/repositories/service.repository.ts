@@ -1,4 +1,4 @@
-import { Service } from '@domain/entities/service'
+import { Service } from '@domain/entities'
 
 export interface ServicesRepository {
   findById(id: string): Promise<Service | null>

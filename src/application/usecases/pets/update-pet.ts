@@ -33,14 +33,12 @@ export class UpdatePet {
     }
 
     Object.assign(pet, {
-      props: {
-        ...pet.props,
-        name,
-        specie,
-        breed,
-        ownerId: petOwner.id,
-        updatedAt: new Date()
-      }
+      ...pet,
+      name,
+      specie,
+      breed,
+      ownerId: petOwner.id,
+      updatedAt: new Date()
     })
 
     this.petsRepository.save(pet)

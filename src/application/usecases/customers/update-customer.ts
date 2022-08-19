@@ -1,4 +1,4 @@
-import { CustomersRepository } from '@application/repositories/CustomersRepository'
+import { CustomersRepository } from '@application/repositories'
 import { inject, injectable } from 'tsyringe'
 
 type CustomerProps = {
@@ -24,14 +24,12 @@ export class UpdateCustomer {
     }
 
     Object.assign(customer, {
-      props: {
-        ...customer.props,
-        name,
-        email,
-        phone,
-        address,
-        updatedAt: new Date()
-      }
+      ...customer,
+      name,
+      email,
+      phone,
+      address,
+      updatedAt: new Date()
     })
 
     this.customersRepository.save(customer)
