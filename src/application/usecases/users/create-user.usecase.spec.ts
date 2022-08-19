@@ -1,6 +1,6 @@
 import { User } from '@domain/entities'
 import { InMemoryUsersRepository } from '@tests/repositories'
-import { CreateUser } from './create-user'
+import { CreateUser } from './'
 
 let usersRepository: InMemoryUsersRepository
 let sut: CreateUser

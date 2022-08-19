@@ -1,6 +1,6 @@
 import { Customer, Pet } from '@domain/entities'
 import { InMemoryCustomersRepository, InMemoryPetsRepository } from '@tests/repositories'
-import { UpdatePet } from './update-pet'
+import { UpdatePet } from './'
 
 let petsRepository: InMemoryPetsRepository
 let customersRepository: InMemoryCustomersRepository

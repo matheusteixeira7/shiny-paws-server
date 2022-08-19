@@ -4,7 +4,7 @@ import {
   InMemoryServicesRepository,
   InMemoryTransactionsRepository
 } from '@tests/repositories'
-import { CreateTransaction } from './create-transaction'
+import { CreateTransaction } from './'
 
 let transactionsRepository: InMemoryTransactionsRepository
 let customersRepository: InMemoryCustomersRepository

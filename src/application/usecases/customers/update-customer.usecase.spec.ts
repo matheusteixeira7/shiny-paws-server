@@ -1,6 +1,6 @@
 import { Customer } from '@domain/entities/'
 import { InMemoryCustomersRepository } from '@tests/repositories'
-import { UpdateCustomer } from './update-customer'
+import { UpdateCustomer } from './'
 
 let customersRepository: InMemoryCustomersRepository
 let sut: UpdateCustomer

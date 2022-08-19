@@ -1,22 +1,22 @@
 import { Service } from '@domain/entities'
 import { InMemoryServicesRepository } from '@tests/repositories'
-import { DeleteService } from './delete-services'
+import { GetService } from './'
 
 let servicesRepository: InMemoryServicesRepository
-let sut: DeleteService
+let sut: GetService
 
-describe('Delete service use case', () => {
+describe('Get service use case', () => {
   beforeEach(() => {
     servicesRepository = new InMemoryServicesRepository()
-    sut = new DeleteService(servicesRepository)
+    sut = new GetService(servicesRepository)
   })
-  it('should throw error if service not found exists', async () => {
+  it('should throw error if service do not exists', async () => {
     await expect(sut.execute({
       id: '1'
     })).rejects.toThrowError('Service not found.')
   })
 
-  it('should be able to delete a service', async () => {
+  it('should be able to get a service', async () => {
     const service = Service.create({
       name: 'Banho e tosa',
       price: 120
@@ -24,10 +24,10 @@ describe('Delete service use case', () => {
 
     await servicesRepository.save(service)
 
-    await sut.execute({
+    const result = await sut.execute({
       id: service.id
     })
 
-    expect(servicesRepository.items).toHaveLength(0)
+    expect(result).toEqual(service)
   })
 })

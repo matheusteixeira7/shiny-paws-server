@@ -1,6 +1,6 @@
 import { Service } from '@domain/entities'
 import { InMemoryServicesRepository } from '@tests/repositories'
-import { CreateService } from './create-service'
+import { CreateService } from './'
 
 let servicesRepository: InMemoryServicesRepository
 let sut: CreateService

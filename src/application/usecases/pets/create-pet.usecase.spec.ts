@@ -1,24 +1,34 @@
 import { Customer, Pet } from '@domain/entities'
 import { InMemoryCustomersRepository, InMemoryPetsRepository } from '@tests/repositories'
-import { DeletePet } from './delete-pet'
+import { CreatePet } from './'
 
 let petsRepository: InMemoryPetsRepository
 let customersRepository: InMemoryCustomersRepository
-let sut: DeletePet
+let sut: CreatePet
 
-describe('Delete pet use case', () => {
+describe('Create pet use case', () => {
   beforeEach(() => {
     petsRepository = new InMemoryPetsRepository()
     customersRepository = new InMemoryCustomersRepository()
-    sut = new DeletePet(petsRepository)
+    sut = new CreatePet(petsRepository, customersRepository)
   })
-  it('should throw error if pet not found exists', async () => {
+  it('should throw an error if customer does not exist', async () => {
+    const customer = Customer.create({
+      name: 'John Doe',
+      email: 'doe@example.com',
+      phone: '123456',
+      address: '123 Main St'
+    })
+
     await expect(sut.execute({
-      id: '1'
-    })).rejects.toThrowError('Pet not found.')
+      name: 'Apollo',
+      specie: 'dog',
+      breed: 'labrador',
+      ownerId: customer.id
+    })).rejects.toThrow()
   })
 
-  it('should be able to delete a pet', async () => {
+  it('should be able to create a new pet', async () => {
     const customer = Customer.create({
       name: 'John Doe',
       email: 'doe@example.com',
@@ -28,19 +38,13 @@ describe('Delete pet use case', () => {
 
     await customersRepository.save(customer)
 
-    const pet = Pet.create({
+    const pet = await sut.execute({
       name: 'Apollo',
       specie: 'dog',
-      breed: 'labrador',
+      breed: 'pitbull',
       ownerId: customer.id
     })
 
-    await petsRepository.save(pet)
-
-    await sut.execute({
-      id: pet.id
-    })
-
-    expect(petsRepository.items).toHaveLength(0)
+    expect(pet).toBeInstanceOf(Pet)
   })
 })

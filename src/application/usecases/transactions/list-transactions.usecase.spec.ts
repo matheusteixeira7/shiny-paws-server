@@ -1,6 +1,6 @@
 import { Service, Customer, Transaction } from '@domain/entities'
 import { InMemoryTransactionsRepository } from '@tests/repositories'
-import { ListTransactions } from './list-transactions'
+import { ListTransactions } from './'
 
 let transactionsRepository: InMemoryTransactionsRepository
 let sut: ListTransactions
@@ -25,14 +25,14 @@ describe('ListTransactions', () => {
     })
 
     const transaction = Transaction.create({
-      services: [service],
+      servicesIds: [service.id],
       totalPrice: 120,
       isPaid: false,
       customerId: customer.id
     })
 
     const transaction2 = Transaction.create({
-      services: [service],
+      servicesIds: [service.id],
       totalPrice: 120,
       isPaid: false,
       customerId: customer.id

@@ -1,34 +1,34 @@
 import { User } from '@domain/entities'
 import { InMemoryUsersRepository } from '@tests/repositories'
-import { GetUser } from './get-user'
+import { DeleteUser } from './'
 
 let usersRepository: InMemoryUsersRepository
-let sut: GetUser
+let sut: DeleteUser
 
-describe('Get user use case', () => {
+describe('Delete user use case', () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository()
-    sut = new GetUser(usersRepository)
+    sut = new DeleteUser(usersRepository)
   })
-  it('should throw error if user do not exists', async () => {
+  it('should throw error if user not found exists', async () => {
     await expect(sut.execute({
       id: '1'
     })).rejects.toThrow()
   })
 
-  it('should be able to get an user', async () => {
+  it('should be able to delete a user', async () => {
     const user = User.create({
       name: 'Diego',
-      email: 'asd@email.com',
+      email: 'doe@example.com',
       password: '123456'
     })
 
     await usersRepository.save(user)
 
-    const result = await sut.execute({
+    await sut.execute({
       id: user.id
     })
 
-    expect(result).toEqual(user)
+    expect(usersRepository.items).toHaveLength(0)
   })
 })

@@ -1,7 +1,7 @@
 import { User } from '@domain/entities'
 import { HashHandler } from '@infra/gateways'
 import { InMemoryUsersRepository } from '@tests/repositories'
-import { UpdateUser } from './update-user'
+import { UpdateUser } from './'
 
 let usersRepository: InMemoryUsersRepository
 let sut: UpdateUser

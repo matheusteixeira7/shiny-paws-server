@@ -4,8 +4,7 @@ import {
   InMemoryServicesRepository,
   InMemoryTransactionsRepository
 } from '@tests/repositories'
-import { CreateTransaction } from './create-transaction'
-import { UpdateTransaction } from './update-transaction'
+import { CreateTransaction, UpdateTransaction } from './'
 import { setTimeout } from 'timers/promises'
 
 let transactionsRepository: InMemoryTransactionsRepository
