@@ -8,7 +8,7 @@ type IPetProps = {
 }
 
 export class Pet {
-  id?: string
+  id: string
   name: string
   specie: 'dog' | 'cat'
   breed: string
