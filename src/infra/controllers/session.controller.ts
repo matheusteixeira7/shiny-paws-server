@@ -1,4 +1,4 @@
-import { CreateSession } from '@application/usecases/session/create-session'
+import { CreateSession } from '@application/usecases/session/'
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
