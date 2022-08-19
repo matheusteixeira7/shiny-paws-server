@@ -39,3 +39,9 @@ describe('Create customer use case', () => {
     expect(customer).toBeInstanceOf(Customer)
   })
 })
+
+// describe('Create customer use case', () => {
+//   it('should be able to create a new customer', async () => {
+//     expect(true).toBe(true)
+//   })
+// })

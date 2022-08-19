@@ -1,5 +1,5 @@
-import { Customer } from '@domain/entities/customer'
-import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-customers-repository'
+import { Customer } from '@domain/entities'
+import { InMemoryCustomersRepository } from '@tests/repositories'
 import { ListCustomers } from './list-customers'
 
 let customersRepository: InMemoryCustomersRepository

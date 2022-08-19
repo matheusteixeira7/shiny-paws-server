@@ -1,5 +1,5 @@
-import { Customer } from '@domain/entities/customer'
-import { InMemoryCustomersRepository } from '@tests/repositories/in-memory-customers-repository'
+import { Customer } from '@domain/entities/'
+import { InMemoryCustomersRepository } from '@tests/repositories'
 import { UpdateCustomer } from './update-customer'
 
 let customersRepository: InMemoryCustomersRepository
@@ -31,13 +31,11 @@ describe('Update customer use case', () => {
     await customersRepository.save(customer)
 
     Object.assign(customer, {
-      props: {
-        ...customer.props,
-        name: 'Matheus Teixeira',
-        email: 'teixeira@example.com',
-        phone: '123456',
-        address: '123 Main St'
-      }
+      ...customer,
+      name: 'Matheus Teixeira',
+      email: 'teixeira@example.com',
+      phone: '123456',
+      address: '123 Main St'
     })
 
     const result = await sut.execute({
@@ -48,6 +46,6 @@ describe('Update customer use case', () => {
       address: '123 Main St'
     })
 
-    expect(result.props.name).toEqual(customer.props.name)
+    expect(result.name).toEqual(customer.name)
   })
 })

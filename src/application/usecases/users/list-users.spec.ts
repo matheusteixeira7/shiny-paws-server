@@ -17,8 +17,6 @@ describe('List user use case', () => {
       password: '123456'
     })
 
-    console.log(user1)
-
     const user2 = User.create({
       name: 'Matheus',
       email: 'doe@example.com',
