@@ -5,7 +5,7 @@ import { injectable, inject } from 'tsyringe'
 @injectable()
 export class DeleteTransaction {
   constructor (
-    @inject('InMemoryTransactionsRepository')
+    @inject('PrismaTransactionRepository')
     private transactionsRepository: TransactionsRepository
   ) {}
 

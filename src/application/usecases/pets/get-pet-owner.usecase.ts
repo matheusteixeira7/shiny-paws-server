@@ -6,7 +6,7 @@ import { inject, injectable } from 'tsyringe'
 @injectable()
 export class GetPetOwner {
   constructor (
-    @inject('InMemoryCustomersRepository')
+    @inject('PrismaCustomerRepository')
     private customersRepository: CustomersRepository
   ) {}
 

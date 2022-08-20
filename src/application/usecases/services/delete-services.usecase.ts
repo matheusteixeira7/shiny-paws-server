@@ -9,7 +9,7 @@ type ServiceProps = {
 @injectable()
 export class DeleteService {
   constructor (
-    @inject('InMemoryServicesRepository')
+    @inject('PrismaServiceRepository')
     private servicesRepository: ServicesRepository
   ) {}
 

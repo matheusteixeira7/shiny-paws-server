@@ -13,9 +13,9 @@ type PetPropsRequest = {
 @injectable()
 export class CreatePet {
   constructor (
-    @inject('InMemoryPetsRepository')
+    @inject('PrismaPetRepository')
     private petsRepository: PetsRepository,
-    @inject('InMemoryCustomersRepository')
+    @inject('PrismaCustomerRepository')
     private customersRepository: CustomersRepository
 
   ) {}

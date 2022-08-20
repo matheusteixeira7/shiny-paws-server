@@ -13,7 +13,7 @@ type UpdateTransactionProps = {
 @injectable()
 export class UpdateTransaction {
   constructor (
-    @inject('InMemoryTransactionsRepository')
+    @inject('PrismaTransactionRepository')
     private transactionsRepository: TransactionsRepository
   ) {}
 

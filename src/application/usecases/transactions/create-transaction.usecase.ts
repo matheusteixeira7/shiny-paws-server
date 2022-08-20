@@ -15,11 +15,11 @@ type CreateTransactionProps = {
 @injectable()
 export class CreateTransaction {
   constructor (
-    @inject('InMemoryTransactionsRepository')
+    @inject('PrismaTransactionRepository')
     private transactionsRepository: TransactionsRepository,
-    @inject('InMemoryCustomersRepository')
+    @inject('PrismaCustomerRepository')
     private customersRepository: CustomersRepository,
-    @inject('InMemoryServicesRepository')
+    @inject('PrismaServiceRepository')
     private servicesRepository: ServicesRepository
   ) {}
 

@@ -4,7 +4,7 @@ import { inject, injectable } from 'tsyringe'
 @injectable()
 export class ListUsers {
   constructor (
-    @inject('InMemoryUsersRepository')
+    @inject('PrismaUserRepository')
     private usersRepository: UsersRepository
   ) {}
 

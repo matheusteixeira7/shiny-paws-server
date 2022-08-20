@@ -9,7 +9,7 @@ type UserProps = {
 @injectable()
 export class GetUser {
   constructor (
-    @inject('InMemoryUsersRepository')
+    @inject('PrismaUserRepository')
     private usersRepository: UsersRepository
   ) {}
 

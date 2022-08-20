@@ -14,7 +14,7 @@ type UserProps = {
 @injectable()
 export class UpdateUser {
   constructor (
-    @inject('InMemoryUsersRepository')
+    @inject('PrismaUserRepository')
     private usersRepository: UsersRepository
   ) {}
 

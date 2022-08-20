@@ -9,7 +9,7 @@ type PetProps = {
 @injectable()
 export class DeletePet {
   constructor (
-    @inject('InMemoryPetsRepository')
+    @inject('PrismaPetRepository')
     private petsRepository: PetsRepository
   ) {}
 

@@ -11,7 +11,7 @@ type ServiceProps = {
 @injectable()
 export class UpdateService {
   constructor (
-    @inject('InMemoryServicesRepository')
+    @inject('PrismaServiceRepository')
     private servicesRepository: ServicesRepository
   ) {}
 

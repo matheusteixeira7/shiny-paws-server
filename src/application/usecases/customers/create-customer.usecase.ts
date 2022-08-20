@@ -14,7 +14,7 @@ type CustomerProps = {
 @injectable()
 export class CreateCustomer {
   constructor (
-    @inject('InMemoryCustomersRepository')
+    @inject('PrismaCustomerRepository')
     private customersRepository: CustomersRepository
   ) {}
 

@@ -17,7 +17,7 @@ interface IResponse {
 @injectable()
 export class CreateSession {
   constructor (
-    @inject('InMemoryUsersRepository')
+    @inject('PrismaUserRepository')
     private usersRepository: UsersRepository
   ) {}
 

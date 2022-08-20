@@ -12,7 +12,7 @@ type CustomerProps = {
 @injectable()
 export class UpdateCustomer {
   constructor (
-    @inject('InMemoryCustomersRepository')
+    @inject('PrismaCustomerRepository')
     private customersRepository: CustomersRepository
   ) {}
 
