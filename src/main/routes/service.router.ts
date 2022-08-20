@@ -1,3 +1,4 @@
+import { isAuthenticated } from '@main/middlewares/is-authenticated'
 import { Router } from 'express'
 import { celebrate, Segments, Joi } from 'celebrate'
 import { ServicesController } from '@infra/controllers'
@@ -5,9 +6,10 @@ import { ServicesController } from '@infra/controllers'
 export const servicesRouter = Router()
 const servicesController = new ServicesController()
 
-servicesRouter.get('/', servicesController.list)
+servicesRouter.get('/', isAuthenticated, servicesController.list)
 
 servicesRouter.get('/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()
@@ -17,6 +19,7 @@ servicesRouter.get('/:id',
 )
 
 servicesRouter.post('/',
+  isAuthenticated,
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
@@ -27,6 +30,7 @@ servicesRouter.post('/',
 )
 
 servicesRouter.put('/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()
@@ -40,6 +44,7 @@ servicesRouter.put('/:id',
 )
 
 servicesRouter.delete('/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()

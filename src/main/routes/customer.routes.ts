@@ -1,13 +1,15 @@
 import { Router } from 'express'
 import { CustomersController } from '@infra/controllers'
 import { celebrate, Joi, Segments } from 'celebrate'
+import { isAuthenticated } from '@main/middlewares/is-authenticated'
 
 export const customersRouter = Router()
 const customersController = new CustomersController()
 
-customersRouter.get('/', customersController.list)
+customersRouter.get('/', isAuthenticated, customersController.list)
 
 customersRouter.post('/',
+  isAuthenticated,
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
@@ -20,6 +22,7 @@ customersRouter.post('/',
 )
 
 customersRouter.delete('/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()
@@ -28,6 +31,7 @@ customersRouter.delete('/:id',
   customersController.delete
 )
 customersRouter.get('/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()
@@ -37,6 +41,7 @@ customersRouter.get('/:id',
 )
 
 customersRouter.put('/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()

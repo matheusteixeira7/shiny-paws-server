@@ -1,3 +1,4 @@
+import { isAuthenticated } from '@main/middlewares/is-authenticated'
 import { Router } from 'express'
 import { celebrate, Joi, Segments } from 'celebrate'
 import { PetsController } from '@infra/controllers'
@@ -5,9 +6,10 @@ import { PetsController } from '@infra/controllers'
 export const petsRouter = Router()
 const petsController = new PetsController()
 
-petsRouter.get('/', petsController.list)
+petsRouter.get('/', isAuthenticated, petsController.list)
 
 petsRouter.post('/',
+  isAuthenticated,
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
@@ -20,6 +22,7 @@ petsRouter.post('/',
 )
 
 petsRouter.get('/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()
@@ -29,6 +32,7 @@ petsRouter.get('/:id',
 )
 
 petsRouter.get('/getowner/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()
@@ -38,6 +42,7 @@ petsRouter.get('/getowner/:id',
 )
 
 petsRouter.delete('/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()
@@ -47,6 +52,7 @@ petsRouter.delete('/:id',
 )
 
 petsRouter.put('/:id',
+  isAuthenticated,
   celebrate({
     [Segments.PARAMS]: {
       id: Joi.string().uuid().required()
