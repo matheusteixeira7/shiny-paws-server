@@ -10,7 +10,7 @@ type IPetProps = {
 export class Pet {
   id: string
   name: string
-  specie: 'dog' | 'cat'
+  specie: string
   breed: string
   ownerId: string
   createdAt?: Date
