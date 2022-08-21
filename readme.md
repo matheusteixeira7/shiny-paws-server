@@ -72,9 +72,9 @@ Para rodar este projeto em mode de desenvolvimento, você irá precisar da Docke
 **Cloning the Repository**
 
 ```
-$ gh repo clone matheusteixeira7/pets
+$ gh repo clone matheusteixeira7/shiny-paws
 
-$ cd pets
+$ cd shiny-paws
 ```
 
 **Instalando as dependências**
