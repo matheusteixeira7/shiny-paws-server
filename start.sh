@@ -2,5 +2,5 @@
 
 yarn
 
-#tail -f /dev/null
+# tail -f /dev/null
 yarn dev

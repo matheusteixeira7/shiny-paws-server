@@ -17,6 +17,10 @@ app.use((req, res, next) => {
   next()
 })
 
+process.on('SIGTERM', () => {
+  process.exit()
+})
+
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server started on port ${process.env.PORT} 🚀`)
 })

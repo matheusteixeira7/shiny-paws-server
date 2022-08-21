@@ -23,7 +23,7 @@ describe('UpdateTransaction', () => {
       customersRepository,
       servicesRepository
     )
-    sut = new UpdateTransaction(transactionsRepository)
+    sut = new UpdateTransaction(transactionsRepository, customersRepository, servicesRepository)
   })
 
   it('should throw error if transaction is not found.', async () => {
@@ -44,9 +44,10 @@ describe('UpdateTransaction', () => {
     expect(
       sut.execute({
         id: 'any',
-        services: [service],
+        servicesIds: [service.id],
         isPaid: false,
-        customerId: customer.id
+        customerId: customer.id,
+        totalPrice: 0
       })
     ).rejects.toThrow()
   })

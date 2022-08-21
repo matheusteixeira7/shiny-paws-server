@@ -1,3 +1,4 @@
+import { InvalidParamError } from '@application/errors'
 import {
   CustomersRepository,
   ServicesRepository,
@@ -33,6 +34,10 @@ export class CreateTransaction {
     }
 
     const services = await this.servicesRepository.findByIds(servicesIds)
+
+    if (services.length !== servicesIds.length) {
+      throw new InvalidParamError('One or more services do not exist.')
+    }
 
     const customer = await this.customersRepository.findById(customerId)
 
