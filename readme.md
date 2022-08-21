@@ -96,6 +96,7 @@ o próprio Docker irá instalar a pasta node_modules para você.
 - [Docker](https://www.docker.com/) - O Docker é uma plataforma open source que facilita a criação e administração de ambientes isolados
 - [Clean Architecture](https://redux-saga.js.org/) - Clean Architecture é uma arquitetura de software proposta por Robert Cecil Martin (ou Uncle Bob, como é mais conhecido) que tem por objetivo padronizar e organizar o código desenvolvido, favorecer a sua reusabilidade, assim como independência de tecnologia
 - [Jest](https://jestjs.io/) - Framework de testes
+- [Celebrate](https://github.com/arb/celebrate) - Routes JOI Validation
 - [Tsyringe](https://github.com/microsoft/tsyringe) - Injeção de dependência
 - [Prisma](https://www.prisma.io/) - ORM
 - [ESlint](https://eslint.org/) - Linter
