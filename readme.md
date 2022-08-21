@@ -1,4 +1,4 @@
-# MindCast
+# Shiny Paws API
 
 ![Preview-Screens](https://i.ibb.co/k60hdpy/clean-architecture-github.png)
 
