@@ -32,7 +32,7 @@ export class CreateCustomer {
       address
     })
 
-    this.customersRepository.save(newCustomer)
+    this.customersRepository.create(newCustomer)
 
     return newCustomer
   }

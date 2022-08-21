@@ -21,8 +21,8 @@ describe('List user use case', () => {
       price: 50
     })
 
-    await servicesRepository.save(service1)
-    await servicesRepository.save(service2)
+    await servicesRepository.create(service1)
+    await servicesRepository.create(service2)
 
     const services = await sut.execute()
 

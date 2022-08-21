@@ -31,10 +31,11 @@ export class UpdateService {
     Object.assign(service, {
       ...service,
       name,
-      price
+      price,
+      updatedAt: new Date()
     })
 
-    this.servicesRepository.save(service)
+    this.servicesRepository.update(service)
 
     return service
   }

@@ -23,7 +23,7 @@ describe('Delete user use case', () => {
       password: '123456'
     })
 
-    await usersRepository.save(user)
+    await usersRepository.create(user)
 
     await sut.execute({
       id: user.id

@@ -59,8 +59,8 @@ describe('CreateTransaction', () => {
       price: 120
     })
 
-    await servicesRepository.save(service)
-    await servicesRepository.save(service2)
+    await servicesRepository.create(service)
+    await servicesRepository.create(service2)
 
     const customer = Customer.create({
       name: 'any',
@@ -69,7 +69,7 @@ describe('CreateTransaction', () => {
       phone: 'any'
     })
 
-    await customersRepository.save(customer)
+    await customersRepository.create(customer)
 
     const transaction = await sut.execute({
       servicesIds: [service.id, service2.id],

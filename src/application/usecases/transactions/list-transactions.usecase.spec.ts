@@ -38,8 +38,8 @@ describe('ListTransactions', () => {
       customerId: customer.id
     })
 
-    transactionsRepository.save(transaction)
-    transactionsRepository.save(transaction2)
+    transactionsRepository.create(transaction)
+    transactionsRepository.create(transaction2)
 
     const transactions = await sut.execute()
 

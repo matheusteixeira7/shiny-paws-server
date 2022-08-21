@@ -32,7 +32,7 @@ export class CreateUser {
       password: hashedPassword
     })
 
-    this.usersRepository.save(newUser)
+    this.usersRepository.create(newUser)
 
     return newUser
   }

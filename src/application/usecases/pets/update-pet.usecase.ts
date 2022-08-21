@@ -41,7 +41,7 @@ export class UpdatePet {
       updatedAt: new Date()
     })
 
-    this.petsRepository.save(pet)
+    this.petsRepository.update(pet)
 
     return pet
   }

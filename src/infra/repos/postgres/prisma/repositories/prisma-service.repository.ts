@@ -29,13 +29,26 @@ export class PrismaServiceRepository implements ServicesRepository {
     })
   }
 
-  async save (service: Service): Promise<Service> {
+  async create (service: Service): Promise<Service> {
     return await prisma.service.create({
       data: {
         id: service.id,
         name: service.name,
         price: service.price,
         createdAt: service.createdAt,
+        updatedAt: service.updatedAt
+      }
+    })
+  }
+
+  update (service: Service): Promise<Service> {
+    return prisma.service.update({
+      where: {
+        id: service.id
+      },
+      data: {
+        name: service.name,
+        price: service.price,
         updatedAt: service.updatedAt
       }
     })

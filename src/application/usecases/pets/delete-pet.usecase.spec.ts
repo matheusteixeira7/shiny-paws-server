@@ -26,7 +26,7 @@ describe('Delete pet use case', () => {
       address: '123 Main St'
     })
 
-    await customersRepository.save(customer)
+    await customersRepository.create(customer)
 
     const pet = Pet.create({
       name: 'Apollo',
@@ -35,7 +35,7 @@ describe('Delete pet use case', () => {
       ownerId: customer.id
     })
 
-    await petsRepository.save(pet)
+    await petsRepository.create(pet)
 
     await sut.execute({
       id: pet.id

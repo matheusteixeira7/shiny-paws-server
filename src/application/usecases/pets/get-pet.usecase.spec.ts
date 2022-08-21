@@ -26,7 +26,7 @@ describe('Get pet use case', () => {
       address: '123 Main St'
     })
 
-    await customersRepository.save(customer)
+    await customersRepository.create(customer)
 
     const pet = Pet.create({
       name: 'Banho e tosa',
@@ -36,7 +36,7 @@ describe('Get pet use case', () => {
 
     })
 
-    await petsRepository.save(pet)
+    await petsRepository.create(pet)
 
     const result = await sut.execute({
       id: pet.id

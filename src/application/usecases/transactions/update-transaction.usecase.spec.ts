@@ -39,7 +39,7 @@ describe('UpdateTransaction', () => {
       address: 'Rua Santos Dumont, 299'
     })
 
-    await customersRepository.save(customer)
+    await customersRepository.create(customer)
 
     expect(
       sut.execute({
@@ -57,7 +57,7 @@ describe('UpdateTransaction', () => {
       price: 120
     })
 
-    await servicesRepository.save(service)
+    await servicesRepository.create(service)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -66,7 +66,7 @@ describe('UpdateTransaction', () => {
       address: 'Rua Santos Dumont, 299'
     })
 
-    await customersRepository.save(customer)
+    await customersRepository.create(customer)
 
     const transaction = await createTransaction.execute({
       servicesIds: [service.id],
@@ -74,7 +74,7 @@ describe('UpdateTransaction', () => {
       customerId: customer.id
     })
 
-    transactionsRepository.save(transaction)
+    transactionsRepository.create(transaction)
 
     async function UpdatedTransaction () {
       await setTimeout(2000)
@@ -98,8 +98,8 @@ describe('UpdateTransaction', () => {
       price: 120
     })
 
-    await servicesRepository.save(service)
-    await servicesRepository.save(service2)
+    await servicesRepository.create(service)
+    await servicesRepository.create(service2)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -108,7 +108,7 @@ describe('UpdateTransaction', () => {
       address: 'Rua Santos Dumont, 299'
     })
 
-    await customersRepository.save(customer)
+    await customersRepository.create(customer)
 
     const transaction = await createTransaction.execute({
       servicesIds: [service.id],
@@ -116,7 +116,7 @@ describe('UpdateTransaction', () => {
       customerId: customer.id
     })
 
-    transactionsRepository.save(transaction)
+    transactionsRepository.create(transaction)
 
     const updated = Object.assign({}, transaction, {
       ...transaction,
@@ -132,7 +132,7 @@ describe('UpdateTransaction', () => {
       price: 120
     })
 
-    await servicesRepository.save(service)
+    await servicesRepository.create(service)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -141,7 +141,7 @@ describe('UpdateTransaction', () => {
       address: 'Rua Santos Dumont, 299'
     })
 
-    await customersRepository.save(customer)
+    await customersRepository.create(customer)
 
     const transaction = await createTransaction.execute({
       servicesIds: [service.id],
@@ -149,7 +149,7 @@ describe('UpdateTransaction', () => {
       customerId: customer.id
     })
 
-    transactionsRepository.save(transaction)
+    transactionsRepository.create(transaction)
 
     const updated = Object.assign({}, transaction, {
       ...transaction,
@@ -165,7 +165,7 @@ describe('UpdateTransaction', () => {
       price: 120
     })
 
-    await servicesRepository.save(service)
+    await servicesRepository.create(service)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -181,8 +181,8 @@ describe('UpdateTransaction', () => {
       address: 'Rua Santos Dumont, 299'
     })
 
-    await customersRepository.save(customer)
-    await customersRepository.save(customer2)
+    await customersRepository.create(customer)
+    await customersRepository.create(customer2)
 
     const transaction = await createTransaction.execute({
       servicesIds: [service.id],
@@ -190,7 +190,7 @@ describe('UpdateTransaction', () => {
       customerId: customer.id
     })
 
-    transactionsRepository.save(transaction)
+    transactionsRepository.create(transaction)
 
     const updated = Object.assign({}, transaction, {
       ...transaction,

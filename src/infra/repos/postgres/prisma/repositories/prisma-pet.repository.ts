@@ -27,7 +27,7 @@ export class PrismaPetRepository implements PetsRepository {
     })
   }
 
-  async save (pet: Pet): Promise<Pet> {
+  async create (pet: Pet): Promise<Pet> {
     return await prisma.pet.create({
       data: {
         id: pet.id,
@@ -36,6 +36,21 @@ export class PrismaPetRepository implements PetsRepository {
         breed: pet.breed,
         ownerId: pet.ownerId,
         createdAt: pet.createdAt,
+        updatedAt: pet.updatedAt
+      }
+    })
+  }
+
+  async update (pet: Pet): Promise<Pet> {
+    return await prisma.pet.update({
+      where: {
+        id: pet.id
+      },
+      data: {
+        name: pet.name,
+        specie: pet.specie,
+        breed: pet.breed,
+        ownerId: pet.ownerId,
         updatedAt: pet.updatedAt
       }
     })

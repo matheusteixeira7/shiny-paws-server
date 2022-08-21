@@ -44,8 +44,8 @@ describe('Update pet use case', () => {
       address: '123 Main St'
     })
 
-    customersRepository.save(customer)
-    customersRepository.save(customer2)
+    customersRepository.create(customer)
+    customersRepository.create(customer2)
 
     const pet = Pet.create({
       name: 'Apollo',
@@ -54,7 +54,7 @@ describe('Update pet use case', () => {
       ownerId: customer.id
     })
 
-    await petsRepository.save(pet)
+    await petsRepository.create(pet)
 
     Object.assign(pet, {
       ...pet,
@@ -90,8 +90,8 @@ describe('Update pet use case', () => {
       address: '123 Main St'
     })
 
-    customersRepository.save(customer)
-    customersRepository.save(customer2)
+    customersRepository.create(customer)
+    customersRepository.create(customer2)
 
     const pet = Pet.create({
       name: 'Apollo',
@@ -100,7 +100,7 @@ describe('Update pet use case', () => {
       ownerId: customer.id
     })
 
-    await petsRepository.save(pet)
+    await petsRepository.create(pet)
 
     const updatedPet = Object.assign({}, pet, {
       ...pet,
@@ -136,8 +136,8 @@ describe('Update pet use case', () => {
       address: '123 Main St'
     })
 
-    customersRepository.save(customer)
-    customersRepository.save(customer2)
+    customersRepository.create(customer)
+    customersRepository.create(customer2)
 
     const pet = Pet.create({
       name: 'Apollo',
@@ -146,7 +146,7 @@ describe('Update pet use case', () => {
       ownerId: customer.id
     })
 
-    await petsRepository.save(pet)
+    await petsRepository.create(pet)
 
     const updatedPet = Object.assign({}, pet, {
       ...pet,
@@ -182,8 +182,8 @@ describe('Update pet use case', () => {
       address: '123 Main St'
     })
 
-    customersRepository.save(customer)
-    customersRepository.save(customer2)
+    customersRepository.create(customer)
+    customersRepository.create(customer2)
 
     const pet = Pet.create({
       name: 'Apollo',
@@ -192,7 +192,7 @@ describe('Update pet use case', () => {
       ownerId: customer.id
     })
 
-    await petsRepository.save(pet)
+    await petsRepository.create(pet)
 
     Object.assign(pet, {
       ...pet,

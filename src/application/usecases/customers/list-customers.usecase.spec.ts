@@ -25,8 +25,8 @@ describe('List customers use case', () => {
       address: '123 Main St'
     })
 
-    await customersRepository.save(customer)
-    await customersRepository.save(customer2)
+    await customersRepository.create(customer)
+    await customersRepository.create(customer2)
 
     const customers = await sut.execute()
 

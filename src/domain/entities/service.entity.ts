@@ -13,7 +13,7 @@ export class Service {
   updatedAt?: Date
 
   private constructor (props: IServiceProps) {
-    this.id = randomUUID()
+    this.id = this.id ?? randomUUID()
     this.name = props.name
     this.price = props.price
     this.createdAt = new Date()

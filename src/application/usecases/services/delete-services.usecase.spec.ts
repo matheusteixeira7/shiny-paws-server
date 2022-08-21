@@ -22,7 +22,7 @@ describe('Delete service use case', () => {
       price: 120
     })
 
-    await servicesRepository.save(service)
+    await servicesRepository.create(service)
 
     await sut.execute({
       id: service.id

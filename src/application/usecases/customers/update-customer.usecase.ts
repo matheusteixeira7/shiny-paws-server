@@ -32,7 +32,7 @@ export class UpdateCustomer {
       updatedAt: new Date()
     })
 
-    this.customersRepository.save(customer)
+    this.customersRepository.update(customer)
 
     return customer
   }

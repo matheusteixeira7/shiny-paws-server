@@ -34,7 +34,7 @@ export class CreatePet {
       ownerId: customer.id
     })
 
-    this.petsRepository.save(newPet)
+    this.petsRepository.create(newPet)
 
     return newPet
   }

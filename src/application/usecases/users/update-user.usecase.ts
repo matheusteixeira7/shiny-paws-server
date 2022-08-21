@@ -52,7 +52,7 @@ export class UpdateUser {
       updatedAt: new Date()
     })
 
-    this.usersRepository.save(user)
+    this.usersRepository.update(user)
 
     return user
   }

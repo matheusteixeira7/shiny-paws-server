@@ -28,12 +28,18 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
-  async save (pet: Pet): Promise<Pet> {
+  async create (pet: Pet): Promise<Pet> {
     const findIndex = this.items.findIndex(p => p.id === pet.id)
 
     if (findIndex === -1) {
       this.items.push(pet)
     }
+
+    return pet
+  }
+
+  async update (pet: Pet): Promise<Pet> {
+    const findIndex = this.items.findIndex(p => p.id === pet.id)
 
     if (findIndex !== -1) {
       this.items[findIndex] = pet

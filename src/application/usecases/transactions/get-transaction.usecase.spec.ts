@@ -35,7 +35,7 @@ describe('GetTransaction', () => {
       price: 120
     })
 
-    await servicesRepository.save(service)
+    await servicesRepository.create(service)
 
     const customer = Customer.create({
       name: 'John Doe',
@@ -44,7 +44,7 @@ describe('GetTransaction', () => {
       address: 'Rua Santos Dumont, 299'
     })
 
-    await customersRepository.save(customer)
+    await customersRepository.create(customer)
 
     const transaction = await createTransaction.execute({
       servicesIds: [service.id],
@@ -52,7 +52,7 @@ describe('GetTransaction', () => {
       customerId: customer.id
     })
 
-    transactionsRepository.save(transaction)
+    transactionsRepository.create(transaction)
 
     expect(await sut.execute(transaction.id)).toEqual(transaction)
   })

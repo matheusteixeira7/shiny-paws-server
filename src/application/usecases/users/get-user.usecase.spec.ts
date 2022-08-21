@@ -23,7 +23,7 @@ describe('Get user use case', () => {
       password: '123456'
     })
 
-    await usersRepository.save(user)
+    await usersRepository.create(user)
 
     const result = await sut.execute({
       id: user.id

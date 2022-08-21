@@ -23,8 +23,8 @@ describe('List user use case', () => {
       password: '123456'
     })
 
-    await usersRepository.save(user1)
-    await usersRepository.save(user2)
+    await usersRepository.create(user1)
+    await usersRepository.create(user2)
 
     const users = await sut.execute()
 

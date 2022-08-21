@@ -15,7 +15,7 @@ export class User {
   updatedAt?: Date
 
   constructor (props: IUserProps) {
-    this.id = randomUUID()
+    this.id = this.id ?? randomUUID()
     this.name = props.name
     this.email = props.email
     this.password = props.password

@@ -14,12 +14,18 @@ export class InMemoryTransactionsRepository implements TransactionsRepository {
     return transaction
   }
 
-  async save (transaction: Transaction): Promise<Transaction> {
+  async create (transaction: Transaction): Promise<Transaction> {
     const findIndex = this.items.findIndex(t => t.id === transaction.id)
 
     if (findIndex === -1) {
       this.items.push(transaction)
     }
+
+    return transaction
+  }
+
+  async update (transaction: Transaction): Promise<Transaction> {
+    const findIndex = this.items.findIndex(t => t.id === transaction.id)
 
     if (findIndex !== -1) {
       this.items[findIndex] = transaction

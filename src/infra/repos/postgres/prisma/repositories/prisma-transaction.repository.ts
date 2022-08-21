@@ -11,7 +11,7 @@ export class PrismaTransactionRepository implements TransactionsRepository {
     })
   }
 
-  async save (customer: Transaction): Promise<Transaction> {
+  async create (customer: Transaction): Promise<Transaction> {
     return await prisma.transaction.create({
       data: {
         id: customer.id,
@@ -20,6 +20,21 @@ export class PrismaTransactionRepository implements TransactionsRepository {
         isPaid: customer.isPaid,
         customerId: customer.customerId,
         createdAt: customer.createdAt,
+        updatedAt: customer.updatedAt
+      }
+    })
+  }
+
+  async update (customer: Transaction): Promise<Transaction> {
+    return await prisma.transaction.update({
+      where: {
+        id: customer.id
+      },
+      data: {
+        servicesIds: customer.servicesIds,
+        totalPrice: customer.totalPrice,
+        isPaid: customer.isPaid,
+        customerId: customer.customerId,
         updatedAt: customer.updatedAt
       }
     })

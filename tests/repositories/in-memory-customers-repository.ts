@@ -24,12 +24,22 @@ export class InMemoryCustomersRepository implements CustomersRepository {
     return customer
   }
 
-  async save (customer: Customer): Promise<Customer> {
+  async create (customer: Customer): Promise<Customer> {
     const findIndex = this.items.findIndex(c => c.id === customer.id)
 
     if (findIndex === -1) {
       this.items.push(customer)
     }
+
+    if (findIndex !== -1) {
+      this.items[findIndex] = customer
+    }
+
+    return customer
+  }
+
+  async update (customer: Customer): Promise<Customer> {
+    const findIndex = this.items.findIndex(c => c.id === customer.id)
 
     if (findIndex !== -1) {
       this.items[findIndex] = customer

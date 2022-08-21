@@ -47,7 +47,7 @@ export class CreateTransaction {
       totalPrice: services.reduce((acc, service) => acc + service.price, 0)
     })
 
-    await this.transactionsRepository.save(transaction)
+    await this.transactionsRepository.create(transaction)
 
     return transaction
   }

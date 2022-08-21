@@ -35,8 +35,8 @@ describe('Update user use case', () => {
       password: '123456'
     })
 
-    await usersRepository.save(user)
-    await usersRepository.save(user2)
+    await usersRepository.create(user)
+    await usersRepository.create(user2)
 
     await expect(sut.execute({
       id: user2.id,
@@ -52,7 +52,7 @@ describe('Update user use case', () => {
       password: '123456'
     })
 
-    await usersRepository.save(user)
+    await usersRepository.create(user)
 
     await expect(sut.execute({
       id: user.id,
@@ -70,7 +70,7 @@ describe('Update user use case', () => {
       password: '123456'
     })
 
-    await usersRepository.save(user)
+    await usersRepository.create(user)
 
     Object.assign(user, {
       props: {
@@ -96,7 +96,7 @@ describe('Update user use case', () => {
       password: '123456'
     })
 
-    await usersRepository.save(user)
+    await usersRepository.create(user)
 
     Object.assign(user, {
       props: {
@@ -122,7 +122,7 @@ describe('Update user use case', () => {
       password: '123456'
     })
 
-    await usersRepository.save(user)
+    await usersRepository.create(user)
 
     await expect(sut.execute({
       id: user.id,
@@ -139,7 +139,7 @@ describe('Update user use case', () => {
       password: '123456'
     })
 
-    await usersRepository.save(user)
+    await usersRepository.create(user)
 
     Object.assign(user, {
       ...user,

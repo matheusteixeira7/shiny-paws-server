@@ -12,7 +12,7 @@ transactionsRouter.post('/',
   isAuthenticated,
   celebrate({
     [Segments.BODY]: {
-      servicesIds: Joi.string().required(),
+      servicesIds: Joi.array().items(Joi.string().uuid()).required(),
       totalPrice: Joi.number().required(),
       isPaid: Joi.boolean().required(),
       customerId: Joi.string().required()
@@ -37,7 +37,7 @@ transactionsRouter.put('/:id',
       id: Joi.string().uuid().required()
     },
     [Segments.BODY]: {
-      servicesIds: Joi.string().required(),
+      servicesIds: Joi.array().items(Joi.string().uuid()).required(),
       totalPrice: Joi.number().required(),
       isPaid: Joi.boolean().required(),
       customerId: Joi.string().required()

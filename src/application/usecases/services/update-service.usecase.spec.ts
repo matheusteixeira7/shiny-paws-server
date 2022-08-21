@@ -24,7 +24,7 @@ describe('Update service use case', () => {
       price: 120
     })
 
-    await servicesRepository.save(service)
+    await servicesRepository.create(service)
 
     const updatedService = Object.assign({}, service, {
       ...service,
@@ -47,7 +47,7 @@ describe('Update service use case', () => {
       price: 120
     })
 
-    await servicesRepository.save(service)
+    await servicesRepository.create(service)
 
     const updatedService = Object.assign({}, service, {
       ...service,

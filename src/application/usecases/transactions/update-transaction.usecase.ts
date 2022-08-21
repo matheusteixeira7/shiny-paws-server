@@ -35,7 +35,7 @@ export class UpdateTransaction {
       customerId
     })
 
-    this.transactionsRepository.save(transaction)
+    this.transactionsRepository.update(transaction)
 
     return transaction
   }

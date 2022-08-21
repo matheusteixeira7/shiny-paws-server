@@ -32,8 +32,8 @@ describe('List pets use case', () => {
       ownerId: customer.id
     })
 
-    await petsRepository.save(pet1)
-    await petsRepository.save(pet2)
+    await petsRepository.create(pet1)
+    await petsRepository.create(pet2)
 
     const pets = await sut.execute()
 

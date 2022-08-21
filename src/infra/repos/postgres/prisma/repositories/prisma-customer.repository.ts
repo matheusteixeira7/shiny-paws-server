@@ -19,7 +19,7 @@ export class PrismaCustomerRepository implements CustomersRepository {
     })
   }
 
-  async save (customer: Customer): Promise<Customer> {
+  async create (customer: Customer): Promise<Customer> {
     return await prisma.customer.create({
       data: {
         id: customer.id,
@@ -28,6 +28,21 @@ export class PrismaCustomerRepository implements CustomersRepository {
         phone: customer.phone,
         address: customer.address,
         createdAt: customer.createdAt,
+        updatedAt: customer.updatedAt
+      }
+    })
+  }
+
+  async update (customer: Customer): Promise<Customer> {
+    return await prisma.customer.update({
+      where: {
+        id: customer.id
+      },
+      data: {
+        name: customer.name,
+        email: customer.email,
+        phone: customer.phone,
+        address: customer.address,
         updatedAt: customer.updatedAt
       }
     })

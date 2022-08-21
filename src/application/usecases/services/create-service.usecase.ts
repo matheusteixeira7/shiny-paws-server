@@ -26,7 +26,7 @@ export class CreateService {
       price
     })
 
-    this.servicesRepository.save(newService)
+    this.servicesRepository.create(newService)
 
     return newService
   }
