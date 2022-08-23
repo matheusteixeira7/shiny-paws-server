@@ -5,7 +5,7 @@ services:
     build: .
     command: wait-for db:5432 -t 40 -- ./start.sh
     ports:
-      - 8000:3000
+      - 8000:3333
     volumes:
       - .:/usr/app
     depends_on:
