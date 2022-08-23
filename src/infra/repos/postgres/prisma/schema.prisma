@@ -11,7 +11,7 @@ datasource db {
 }
 
 model User {
-  id        String   @unique
+  id        String   @id @default(uuid())
   name      String
   email     String   @unique
   password  String
@@ -20,7 +20,7 @@ model User {
 }
 
 model Service {
-  id        String   @unique
+  id        String   @id @default(uuid())
   name      String   @unique
   price     Int
   createdAt DateTime @default(now())
@@ -28,7 +28,7 @@ model Service {
 }
 
 model Pet {
-  id        String   @unique
+  id        String   @id @default(uuid())
   name      String
   specie    String
   breed     String
@@ -39,7 +39,7 @@ model Pet {
 }
 
 model Customer {
-  id           String        @unique
+  id           String        @id @default(uuid())
   name         String
   email        String        @unique
   phone        String
@@ -51,7 +51,7 @@ model Customer {
 }
 
 model Transaction {
-  id          String   @unique
+  id          String   @id @default(uuid())
   customer    Customer @relation(fields: [customerId], references: [id])
   customerId  String
   isPaid      Boolean

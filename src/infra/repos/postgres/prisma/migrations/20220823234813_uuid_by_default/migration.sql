@@ -5,7 +5,9 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -14,7 +16,9 @@ CREATE TABLE "Service" (
     "name" TEXT NOT NULL,
     "price" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Service_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -25,7 +29,9 @@ CREATE TABLE "Pet" (
     "breed" TEXT NOT NULL,
     "ownerId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Pet_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -36,7 +42,9 @@ CREATE TABLE "Customer" (
     "phone" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Customer_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -47,32 +55,19 @@ CREATE TABLE "Transaction" (
     "totalPrice" INTEGER NOT NULL,
     "servicesIds" TEXT[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
--- CreateIndex
-CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
+    CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Service_id_key" ON "Service"("id");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Service_name_key" ON "Service"("name");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Pet_id_key" ON "Pet"("id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Customer_id_key" ON "Customer"("id");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Customer_email_key" ON "Customer"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Transaction_id_key" ON "Transaction"("id");
 
 -- AddForeignKey
 ALTER TABLE "Pet" ADD CONSTRAINT "Pet_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "Customer"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
